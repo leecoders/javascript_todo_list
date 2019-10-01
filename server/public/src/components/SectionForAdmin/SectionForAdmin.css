@@ -3,5 +3,8 @@ section {
   top: 3.2rem;
   width: auto;
   height: 100%;
-  overflow: hidden;
+}
+
+.admin-container {
+  position: absolute;
 }

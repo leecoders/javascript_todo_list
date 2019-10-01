@@ -1,6 +1,6 @@
 import { $ } from "../../utils/util.js";
 
-class Section {
+class SectionForAdmin {
   constructor(parentElement) {
     this.parentElement = parentElement;
     this.render();
@@ -8,10 +8,10 @@ class Section {
 
   render() {
     this.parentElement.innerHTML = /*html*/ `
-      <div class="section-container">
+      <div class="admin-container">
       </div>
     `;
   }
 }
 
-export { Section };
+export { SectionForAdmin };
