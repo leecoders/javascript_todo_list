@@ -1,0 +1,13 @@
+section {
+  position: absolute;
+  top: 3.2rem;
+  width: auto;
+  height: 100%;
+  overflow: hidden;
+}
+
+.section-container {
+  width: 200rem;
+  height: 500rem;
+  border: 1px solid red;
+}
