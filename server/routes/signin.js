@@ -6,12 +6,12 @@ const { isLoggedIn, isNotLoggedIn } = require("../middlewares/middlewares.js");
 router.use(
   "/signin",
   passport.authenticate("local", {
-    successRedirect: "/auth/success",
+    successRedirect: "/signin/success",
     failureRedirect: "/"
   })
 );
 
-router.use("/logout", isLoggedIn, (req, res) => {
+router.use("/logout", (req, res) => {
   req.logout();
   req.session.destroy();
   res.redirect("/");

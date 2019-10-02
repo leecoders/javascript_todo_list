@@ -11,7 +11,8 @@ const passport = require("passport");
 const passportConfig = require("./passport");
 
 const indexRouter = require("./routes/index.js");
-const authRouter = require("./routes/auth.js");
+const signinRouter = require("./routes/signin.js");
+const todoRouter = require("./routes/todo.js");
 
 const app = express();
 
@@ -30,7 +31,10 @@ app.use(
     secret: "top secret",
     resave: false,
     saveUninitialized: true,
-    store: new FileStore() // sessions 디렉토리 생성
+    store: new FileStore(), // sessions 디렉토리 생성
+    cookie: {
+      maxAge: 1000 * 60 * 30 // 쿠키 유효기간 30분
+    }
   })
 );
 
@@ -40,7 +44,8 @@ app.use(passport.session()); // passport 내부에서 session을 사용할 것�
 passportConfig();
 
 app.use("/", indexRouter);
-app.use("/auth", authRouter);
+app.use("/signin", signinRouter);
+app.use("/todo", todoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

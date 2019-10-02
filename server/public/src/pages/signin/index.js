@@ -1,5 +1,5 @@
 import { $ } from "../../utils/util.js";
-import { fetchSignInResult } from "../../utils/fetchUser.js";
+import { fetchSignInResult } from "../../utils/fetchSignin.js";
 
 const tryLogin = async () => {
   const id = $("#sign-in-id").value;
