@@ -6,8 +6,8 @@ const { isLoggedIn, isNotLoggedIn } = require("../middlewares/middlewares.js");
 router.use(
   "/signin",
   passport.authenticate("local", {
-    successRedirect: "/signin/success",
-    failureRedirect: "/"
+    successRedirect: "/signin/signin-success",
+    failureRedirect: "/signin/signin-failure"
   })
 );
 
@@ -17,8 +17,12 @@ router.use("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.use("/success", (req, res) => {
+router.use("/signin-success", (req, res) => {
   res.send({ message: "success" }); // form이 아닌 fetch로 요청이 왔기 때문에
+});
+
+router.use("/signin-failure", (req, res) => {
+  res.send({ message: "failure" });
 });
 
 module.exports = router;

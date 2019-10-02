@@ -1,19 +1,5 @@
 const $ = selector => document.querySelector(selector);
 
-const openLayer = layer => {
-  $(".outside").style.visibility = "visible";
-  document.body.style.overflow = "hidden";
-  layer.style.visibility = "visible";
-  layer.classList.add("layer-on");
-};
-
-const closeLayer = layer => {
-  $(".outside").style.visibility = "hidden";
-  document.body.style.overflow = "scroll";
-  layer.style.visibility = "hidden";
-  layer.classList.remove("layer-on");
-};
-
 const isOutSideOfLayer = (tx, ty, x1, y1, x2, y2) => {
   return !(x1 <= tx && tx <= x2 && (y1 <= ty && ty <= y2));
 };
@@ -28,16 +14,4 @@ const isOutSideOfLayerClicked = (layer, e) => {
   return false;
 };
 
-const toggleUserClickState = layer => {
-  const lastLayer = $(".layer-on");
-  if (lastLayer) closeLayer(lastLayer);
-  else openLayer(layer);
-};
-
-export {
-  $,
-  openLayer,
-  closeLayer,
-  isOutSideOfLayerClicked,
-  toggleUserClickState
-};
+export { $, isOutSideOfLayerClicked };

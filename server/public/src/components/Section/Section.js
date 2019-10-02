@@ -1,4 +1,5 @@
 import { $ } from "../../utils/util.js";
+import { Modal } from "../Modal/Modal.js";
 
 class Section {
   constructor(parentElement) {
