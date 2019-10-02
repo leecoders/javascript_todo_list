@@ -5,7 +5,7 @@ class Header {
     this.parentElement = parentElement;
     this.pageName = pageName;
     this.render();
-    this.menubutton = $("#user-button");
+    this.menubutton = $("#menu-button");
     this.setClickEvent();
   }
 
@@ -20,11 +20,8 @@ class Header {
   render() {
     this.parentElement.innerHTML = /*html*/ `
       <span>TODO</span>
-      <div class="menu-wrapper">
-      </div>
-      <div class="user-wrapper">
-          <button id="user-button" type="button"></button>
-          <div class="user-bubble-container"></div>
+      <div class="menu-button-wrapper">
+          <button id="menu-button" type="button"></button>
       </div>
     `;
   }

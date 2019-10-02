@@ -19,3 +19,6 @@
 - 로그인 -> 쿠키, 세션 생성 -> 세션 강제 삭제(쿠키는 있음) -> 다시 로그인 -> 세션 찾는 과정에서 폴더 변경으로 nodemon이 서버를 재시작함 -> 문제 가능성
 - 해결 : nodemon에 ignore를 줄 수 있다. `nodemon.json` 또는 `package.json`에 `nodemonConfig` 속성 추가 -> 파일이 재시작되지 않는다.
   - 공식 문서 : [링크](https://github.com/remy/nodemon)
+
+### CSS) 박스 엘리먼트에 `z-index`를 주면 안에 위치하는 엘리먼트들의 `z-index`는 상속된다.
+- 그러므로 해당 박스 엘리먼트 외부에 더 높은 `z-index`를 갖는 요소가 있다면 자식 엘리먼트에 아무리 더 높은 `z-index`를 주더라도 아무 효과 없다.

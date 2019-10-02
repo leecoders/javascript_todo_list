@@ -20,7 +20,13 @@ class Menu {
       "beforeend",
       /*html*/ `
       <div class="menu-wrapper">
-        <button id="menu-close-button" type="button"></button>
+        <div class="menu-title-container">
+        MENU
+          <button id="menu-close-button" type="button"></button>
+        </div>
+        <div class="menu-title-2-container">
+
+        </div>
       </div>
     `
     );
