@@ -5,6 +5,7 @@ html {
 }
 
 body {
+  width: auto;
   height: 100%;
   margin: 0;
   background: #34465c;
@@ -20,4 +21,30 @@ body {
   opacity: 0.5;
   visibility: hidden;
   background-color: #000000;
+}
+
+.body-area {
+  z-index: 101;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+}
+
+.menu-container {
+  position: absolute;
+  top: 0;
+  right: -30rem;
+  width: 30rem;
+  height: 100%;
+  background: red;
+  transition: right 0.3s;
+}
+
+.test-button {
+  position: absolute;
+  top: 60rem;
+  left: 40rem;
+  cursor: pointer;
 }
