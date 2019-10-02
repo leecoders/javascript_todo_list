@@ -16,7 +16,6 @@ const todoRouter = require("./routes/todo.js");
 
 const app = express();
 
-require("dotenv").config();
 require("./model/db.js");
 require("./model/User.js");
 

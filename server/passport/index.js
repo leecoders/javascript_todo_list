@@ -1,36 +1,35 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-
-const authData = {
-  userId: "123",
-  userPassword: "123"
-};
+const User = new (require("../model/User.js"))();
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
-    console.log("serialize", user);
     done(null, user.userId);
   });
-  passport.deserializeUser((userId, done) => {
-    //findById(id, function (err, user) {
-    console.log("deserialize", userId);
-    done(null, authData);
-    //});
+  passport.deserializeUser(async (userId, done) => {
+    const result = await User.findUserById(userId);
+    if (!!result.USER_ID) {
+      done(null, result);
+    } else {
+      console.log(result);
+    }
   });
   passport.use(
     new LocalStrategy(
       { usernameField: "userId", passwordField: "userPassword" },
-      (userId, userPassword, done) => {
-        if (
-          userId === authData.userId &&
-          userPassword === authData.userPassword
-        ) {
-          console.log("correct");
-          return done(null, authData);
-        } else {
-          console.log("incorrect");
+      async (userId, userPassword, done) => {
+        const result = await User.findUser(userId, userPassword);
+        if (result === "success") {
+          return done(null, { userId, userPassword });
+        }
+        if (result === "failure") {
           return done(null, false, {
             message: "Incorrect info."
+          });
+        }
+        if (result === "db not connected") {
+          return done(null, false, {
+            message: "db not connected"
           });
         }
       }
