@@ -17,11 +17,27 @@ class User {
       return "db not connected";
     }
   }
+
+  async findUserById(id) {
+    try {
+      const connection = await pool.getConnection(async conn => conn);
+      const [rows] = await connection.query(
+        `select USER_ID, USER_NAME, USER_GRADE from USER where USER_ID=?`,
+        [id]
+      );
+      connection.release();
+      if (rows.length) return rows[0];
+      else return "failure";
+    } catch (err) {
+      return "db not connected";
+    }
+  }
 }
 
-const user = new User();
-(async () => {
-  console.log(await user.findUser("admin", "admin"));
-})();
+// const user = new User();
+// (async () => {
+//   console.log(await user.findUser("admin", "admin"));
+//   console.log(await user.findUserById("admin"));
+// })();
 
 module.exports = User;
