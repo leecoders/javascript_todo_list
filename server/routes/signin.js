@@ -4,21 +4,17 @@ const passport = require("passport");
 const User = new (require("../model/User.js"))();
 const { isLoggedIn, isNotLoggedIn } = require("../middlewares/middlewares.js");
 
-router.use("/", (req, res) => {
-  res.render("signin");
-});
-
 router.use(
   "/signin",
   passport.authenticate("local", {
-    successRedirect: "/signin/signin-success",
-    failureRedirect: "/signin/signin-failure"
+    successRedirect: "/todo",
+    failureRedirect: "/"
   })
 );
 
 router.use("/find-user", async (req, res) => {
-  const { id, password } = req.body;
-  const result = await User.findUser(id, password);
+  const { userId, userPassword } = req.body;
+  const result = await User.findUser(userId, userPassword);
   res.json(result);
 });
 
@@ -28,12 +24,7 @@ router.use("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.use("/signin-success", (req, res) => {
-  res.render("todo");
-  // res.send({ message: "success" }); // form이 아닌 fetch로 요청이 왔기 때문에
-});
-
-router.use("/signin-failure", (req, res) => {
+router.use("/", (req, res) => {
   res.render("signin");
 });
 

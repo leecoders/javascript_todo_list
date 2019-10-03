@@ -1,4 +1,4 @@
-const serverUrl = "http://localhost:3000/";
+import { serverUrl } from "../serverConfig/index.js";
 
 const fetchSignInResult = (userId, userPassword) => {
   return fetch(serverUrl + "signin/find-user", {

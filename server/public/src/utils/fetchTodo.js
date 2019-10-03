@@ -1,4 +1,4 @@
-const serverUrl = "http://localhost:3000/";
+import { serverUrl } from "../serverConfig/index.js";
 
 const fetchUserInfo = () => {
   return fetch(serverUrl + "todo/user-info", {

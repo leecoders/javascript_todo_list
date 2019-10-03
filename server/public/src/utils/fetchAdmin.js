@@ -1,4 +1,4 @@
-const serverUrl = "http://localhost:3000/";
+import { serverUrl } from "../serverConfig/index.js";
 
 const fetchAllUsers = () => {
   return fetch(serverUrl + "admin/all-users", {

@@ -48,10 +48,10 @@ app.use(passport.initialize()); // passport를 사용하겠다는 것을 req에 
 app.use(passport.session()); // passport 내부에서 session을 사용할 것임
 passportConfig();
 
-app.use("/", indexRouter);
 app.use("/signin", signinRouter);
 app.use("/todo", todoRouter);
 app.use("/admin", adminRouter);
+app.use("/", indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

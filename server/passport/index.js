@@ -4,7 +4,7 @@ const User = new (require("../model/User.js"))();
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
-    done(null, user.userId);
+    done(null, user.id);
   });
   passport.deserializeUser(async (userId, done) => {
     const result = await User.findUserById(userId);
@@ -16,11 +16,11 @@ module.exports = () => {
   });
   passport.use(
     new LocalStrategy(
-      { usernameField: "userId", passwordField: "userPassword" },
-      async (userId, userPassword, done) => {
-        const result = await User.findUser(userId, userPassword);
+      { usernameField: "id", passwordField: "password" },
+      async (id, password, done) => {
+        const result = await User.findUser(id, password);
         if (result === "success") {
-          return done(null, { userId, userPassword });
+          return done(null, { id, password });
         }
         if (result === "failure") {
           return done(null, false, {
