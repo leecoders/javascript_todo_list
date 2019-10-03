@@ -1,7 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const User = new (require("../model/User.js"))();
 const { isLoggedIn, isNotLoggedIn } = require("../middlewares/middlewares.js");
+
+router.use("/", (req, res) => {
+  res.render("signin");
+});
 
 router.use(
   "/signin",
@@ -11,6 +16,12 @@ router.use(
   })
 );
 
+router.use("/find-user", async (req, res) => {
+  const { id, password } = req.body;
+  const result = await User.findUser(id, password);
+  res.json(result);
+});
+
 router.use("/logout", (req, res) => {
   req.logout();
   req.session.destroy();
@@ -18,11 +29,12 @@ router.use("/logout", (req, res) => {
 });
 
 router.use("/signin-success", (req, res) => {
-  res.send({ message: "success" }); // form이 아닌 fetch로 요청이 왔기 때문에
+  res.render("todo");
+  // res.send({ message: "success" }); // form이 아닌 fetch로 요청이 왔기 때문에
 });
 
 router.use("/signin-failure", (req, res) => {
-  res.send({ message: "failure" });
+  res.render("signin");
 });
 
 module.exports = router;

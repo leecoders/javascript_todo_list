@@ -1,7 +1,7 @@
 const serverUrl = "http://localhost:3000/";
 
 const fetchSignInResult = (userId, userPassword) => {
-  return fetch(serverUrl + "signin/signin", {
+  return fetch(serverUrl + "signin/find-user", {
     method: "POST",
     body: JSON.stringify({ userId, userPassword }),
     headers: {

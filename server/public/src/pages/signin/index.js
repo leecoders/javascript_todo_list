@@ -11,7 +11,7 @@ const tryLogin = async () => {
   const id = $("#sign-in-id").value;
   const password = $("#sign-in-password").value;
   const loginResult = await fetchSignInResult(id, password);
-
+  console.log("result: " + loginResult);
   if (loginResult.message == "success") {
     location.href = `../todo`;
     return;
