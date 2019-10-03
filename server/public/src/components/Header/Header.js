@@ -6,7 +6,7 @@ class Header {
     this.pageName = pageName;
     this.render();
     this.menubutton = $("#menu-button");
-    this.setClickEvent();
+    if (pageName !== "admin") this.setClickEvent(); // 관리자 페이지 -> 슬라이드 막음
   }
 
   setClickEvent() {

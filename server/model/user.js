@@ -56,10 +56,10 @@ class User {
         [targetGrade, userId]
       );
       connection.release();
-      if (rows.length) return "success";
-      else return "failure";
+      if (rows.length) res.json("success");
+      else return res.json("failure");
     } catch (err) {
-      return "db not connected";
+      return res.json("db not connected");
     }
   }
 }
