@@ -15,4 +15,6 @@ const isNotLoggedIn = (req, res, next) => {
   }
 };
 
-module.exports = { isLoggedIn, isNotLoggedIn };
+const checkTodo = (req, res, next) => {};
+
+module.exports = { checkTodo };
