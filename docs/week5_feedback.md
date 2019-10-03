@@ -52,3 +52,13 @@ router.use("/asd", (req, res) => {
   - 1번 : 알맞게 `/asd`를 방문
   - 2번 : 둘 다 방문 -> 예상하지 못한 경로 탐색됨
 - 라우터도 미들웨어이기 때문에 `next`를 파라미터로 넘겨 받고 `next()`를 호출하면 다음 미들웨어(경로 탐색 성공한다면 다음 라우터)로 방문한다.
+
+### 라우터에서 url의 마지막 string을 읽어올 수 있다.
+- `GET`방식의 `http`요청과 달리 `?` 없이 요청할 수 있다.
+```javascript
+router.use("/:id", (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  res.render("todo");
+});
+```

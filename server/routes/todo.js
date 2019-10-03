@@ -8,8 +8,16 @@ router.use("/user-info", async (req, res) => {
   res.send(userInfo);
 });
 
-router.use("/", (req, res) => {
-  res.render("todo");
+router.use("/:id", (req, res, next) => {
+  const ownerId = req.params.id; // URL로 입력받은 유저 아이디가 존재하지 않는지 체크해야 함
+  const visiterId = req.user.USER_ID;
+  const visiterGrade = req.user.USER_GRADE;
+  if (visiterGrade === "admin" || ownerId === visiterId) {
+    // 관리자 권한이거나 로그인한 유저 본인이면 todo 연결
+    res.render("todo");
+    return;
+  }
+  next();
 });
 
 module.exports = router;
