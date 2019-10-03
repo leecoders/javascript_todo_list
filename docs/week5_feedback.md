@@ -22,3 +22,33 @@
 
 ### CSS) 박스 엘리먼트에 `z-index`를 주면 안에 위치하는 엘리먼트들의 `z-index`는 상속된다.
 - 그러므로 해당 박스 엘리먼트 외부에 더 높은 `z-index`를 갖는 요소가 있다면 자식 엘리먼트에 아무리 더 높은 `z-index`를 주더라도 아무 효과 없다.
+
+### 라우터 순서가 중요하다.
+1번
+```javascript
+router.use("/asd", (req, res) => {
+  console.log("/asd");
+  res.json({ asd: "asd" });
+});
+
+router.use("/", (req, res) => {
+  console.log("/");
+  res.redirect("pages/admin");
+});
+```
+2번
+```javascript
+router.use("/", (req, res) => {
+  console.log("/");
+  res.redirect("pages/admin");
+});
+router.use("/asd", (req, res) => {
+  console.log("/asd");
+  res.json({ asd: "asd" });
+});
+```
+- 라우터 또한 미들웨어이기 때문에 순서대로 탐색한다.
+- 예를 들어, `.../asd`를 검색하는 경우
+  - 1번 : 알맞게 `/asd`를 방문
+  - 2번 : 둘 다 방문 -> 예상하지 못한 경로 탐색됨
+- 라우터도 미들웨어이기 때문에 `next`를 파라미터로 넘겨 받고 `next()`를 호출하면 다음 미들웨어(경로 탐색 성공한다면 다음 라우터)로 방문한다.

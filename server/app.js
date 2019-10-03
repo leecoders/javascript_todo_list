@@ -13,6 +13,7 @@ const passportConfig = require("./passport");
 const indexRouter = require("./routes/index.js");
 const signinRouter = require("./routes/signin.js");
 const todoRouter = require("./routes/todo.js");
+const adminRouter = require("./routes/admin.js");
 
 const app = express();
 
@@ -49,6 +50,7 @@ passportConfig();
 app.use("/", indexRouter);
 app.use("/signin", signinRouter);
 app.use("/todo", todoRouter);
+app.use("/admin", adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
