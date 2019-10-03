@@ -7,10 +7,14 @@ const { isLoggedIn, isNotLoggedIn } = require("../middlewares/middlewares.js");
 router.use(
   "/signin",
   passport.authenticate("local", {
-    successRedirect: "/todo",
+    successRedirect: "/signin/success",
     failureRedirect: "/"
   })
 );
+
+router.use("/success", (req, res) => {
+  res.redirect("/todo/" + req.user.USER_ID);
+});
 
 router.use("/find-user", async (req, res) => {
   const { userId, userPassword } = req.body;

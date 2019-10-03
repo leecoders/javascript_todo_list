@@ -9,7 +9,7 @@ module.exports = () => {
   passport.deserializeUser(async (userId, done) => {
     const result = await User.findUserById(userId);
     if (!!result.USER_ID) {
-      done(null, result);
+      done(null, result); // 여기의 두 번째 인자가 req.user가 됨
     } else {
       console.log(result);
     }
