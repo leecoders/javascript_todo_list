@@ -10,5 +10,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const menu = new Menu($(".menu-container"));
 
   const userInfo = await fetchUserInfo();
-  console.log(userInfo);
+  const todoOwner = document.title.split("'s todo")[0];
+  console.log(todoOwner);
 });
