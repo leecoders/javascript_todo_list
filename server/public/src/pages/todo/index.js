@@ -5,11 +5,9 @@ import { fetchUserInfo } from "../../utils/fetchTodo.js";
 import { Menu } from "../../components/Menu/Menu.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const todoOwner = document.title.split("'s todo")[0];
+  const userInfo = await fetchUserInfo();
   const header = new Header($("header"), "todo");
   const section = new Section($("section"));
   const menu = new Menu($(".menu-container"));
-
-  const userInfo = await fetchUserInfo();
-  const todoOwner = document.title.split("'s todo")[0];
-  console.log(todoOwner);
 });

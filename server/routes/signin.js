@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const User = new (require("../model/User.js"))();
-const { isLoggedIn, isNotLoggedIn } = require("../middlewares/middlewares.js");
+// const { isLoggedIn, isNotLoggedIn } = require("../middlewares/middlewares.js");
 
 router.use(
   "/signin",
