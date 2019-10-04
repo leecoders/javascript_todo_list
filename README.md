@@ -1,5 +1,13 @@
 # 멤버십 프로젝트 - 웹할일관리 저장소
 
+## 배포
+
+### [로그인](http://106.10.34.142:3000/signin)
+- 계정
+  - ID : admin / PW : admin
+
+### [관리자](http://106.10.34.142:3000/admin)
+
 ## DB
 
 ### DB tables description
