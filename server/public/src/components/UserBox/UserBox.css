@@ -22,12 +22,13 @@
   display: inline-block;
   position: absolute;
   margin: 0.5rem 0.5rem;
-  width: 55rem;
+  width: 90rem;
   height: 4rem;
 }
 
 .user-info-wrapper {
   display: inline-block;
+  width: 25rem;
   flex-direction: column;
   margin: 1rem 0;
   padding: 0.3rem 1.2rem 0.3rem 0.8rem;

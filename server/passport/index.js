@@ -4,9 +4,11 @@ const User = new (require("../model/User.js"))();
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
+    console.log("serializeUser!!");
     done(null, user.id);
   });
   passport.deserializeUser(async (userId, done) => {
+    console.log("deserializeUser!!");
     const result = await User.findUserById(userId);
     if (!!result.USER_ID) {
       done(null, result); // 여기의 두 번째 인자가 req.user가 됨

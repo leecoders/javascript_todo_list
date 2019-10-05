@@ -1,6 +1,6 @@
 import { $ } from "../../utils/util.js";
 
-class Menu {
+class Slide {
   constructor(parentElement) {
     this.parentElement = parentElement;
     this.render();
@@ -33,4 +33,4 @@ class Menu {
   }
 }
 
-export { Menu };
+export { Slide };
