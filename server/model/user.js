@@ -64,10 +64,4 @@ class User {
   }
 }
 
-// const user = new User();
-// (async () => {
-//   console.log(await user.findUser("admin", "admin"));
-//   console.log(await user.findUserById("admin"));
-// })();
-
 module.exports = User;
