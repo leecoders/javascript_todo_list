@@ -8,10 +8,10 @@ class Slide {
   }
 
   setClickEvent() {
-    const menu = $(".menu-container");
-    const closeButton = $("#menu-close-button");
+    const slideContainer = $(".slide-container");
+    const closeButton = $("#slide-close-button");
     closeButton.addEventListener("click", () => {
-      menu.style.right = "-30rem";
+      slideContainer.style.right = "-30rem";
     });
   }
 
@@ -19,13 +19,13 @@ class Slide {
     this.parentElement.insertAdjacentHTML(
       "beforeend",
       /*html*/ `
-      <div class="menu-wrapper">
-        <div class="menu-title-container">
-        MENU
-          <button id="menu-close-button" type="button"></button>
+      <div class="slide-wrapper">
+        <div class="slide-title-container">
+          <span class="slide-menu-icon"></span><span class="slide-menu-name">Menu</span>
+          <button id="slide-close-button" type="button"></button>
         </div>
-        <div class="menu-title-2-container">
-
+        <div class="slide-title-2-container">
+          <span class="slide-menu2-icon"></span><span class="slide-menu2-name">Activity</span>
         </div>
       </div>
     `

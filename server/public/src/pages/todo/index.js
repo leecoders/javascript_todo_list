@@ -9,5 +9,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   const userInfo = await fetchUserInfo();
   const header = new Header($("header"), "todo");
   const section = new Section($("section"));
-  const slide = new Slide($(".menu-container"));
+  const slide = new Slide($(".slide-container"));
 });

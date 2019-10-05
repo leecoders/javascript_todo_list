@@ -11,9 +11,9 @@ class Header {
 
   setClickEvent() {
     this.menubutton.addEventListener("click", () => {
-      const menu = $(".menu-container");
+      const slideContainer = $(".slide-container");
       $(".body-area").style.zIndex = "100";
-      menu.style.right = "0rem";
+      slideContainer.style.right = "0rem";
     });
   }
 
