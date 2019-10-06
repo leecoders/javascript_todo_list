@@ -2,11 +2,12 @@ section {
   position: absolute;
   width: auto;
   height: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .section-title-container {
-  position: relative;
+  position: fixed;
   top: 3.3rem;
   margin: 0.5rem 0 0 1rem;
   width: 100%;
@@ -19,11 +20,17 @@ section {
   position: relative;
   width: auto;
   height: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .list-container {
   position: relative;
+  display: flex;
+  top: 3rem;
+  width: auto;
   height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
   margin: 0 0.5rem;
 }

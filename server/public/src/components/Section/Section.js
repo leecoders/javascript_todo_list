@@ -5,14 +5,14 @@ import { List } from "../List/List.js";
 class Section {
   constructor(parentElement) {
     this.parentElement = parentElement;
-    this.listLength = 3; // for testing
+    this.listLength = 5; // for testing
     this.render();
     this.doTest();
   }
 
   doTest() {
     let listArray = [];
-    for (let i = 0; i < 3; ++i) {
+    for (let i = 0; i < this.listLength; ++i) {
       listArray.push(new List($(".list-container"), i));
     }
   }
