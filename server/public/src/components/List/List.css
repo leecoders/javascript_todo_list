@@ -1,0 +1,70 @@
+.list-wrapper {
+  position: relative;
+  display: inline-block;
+  top: 3.2rem;
+  width: 20rem;
+  height: 88%;
+  margin: 0.3rem;
+  background: #f2f2f2;
+  border: 1px solid #ced4da;
+  border-radius: 0.5rem;
+  overflow: scroll;
+}
+
+.list-title-container {
+  position: relative;
+  display: flex;
+  width: 20rem;
+  height: 1.5rem;
+  padding: 1rem 0 0 1rem;
+  color: #24292e;
+  font-weight: bold;
+}
+
+.todo-container {
+  position: relative;
+  width: 20rem;
+  height: auto;
+}
+
+.todo-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 0.8rem;
+  color: #24292e;
+  background: rgba(27, 31, 35, 0.15);
+  margin-right: 0.5rem;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.list-title {
+  display: inline-block;
+}
+
+.list-plus-button {
+  position: relative;
+  top: -0.2rem;
+  left: 7.8rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  background: url("../../images/plus.png") no-repeat 50% 50%;
+  background-size: 1.2rem 1.2rem;
+  opacity: 0.7;
+}
+
+.list-delete-button {
+  position: relative;
+  top: -0.2rem;
+  left: 7.8rem;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 0.5rem;
+  background: url("../../images/plus.png") no-repeat 50% 50%;
+  background-size: 1.3rem 1.3rem;
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
