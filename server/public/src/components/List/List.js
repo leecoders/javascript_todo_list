@@ -8,7 +8,8 @@ class List {
     this.todoLength = 3; // for testing
     this.render();
     this.setPlusTodoEvent();
-    this.this.doTest();
+    this.setChangeTextareaEvent();
+    this.doTest();
   }
 
   doTest() {
@@ -21,12 +22,22 @@ class List {
   setPlusTodoEvent() {
     this.listAddContainer = $(`#list-add-container-${this.listIdx}`);
     this.listPlusButton = $(`#list-plus-button-${this.listIdx}`);
-    console.log(this.listAddContainer);
     this.listPlusButton.addEventListener("click", () => {
       if (this.listAddContainer.style.display === "block") {
         this.listAddContainer.style.display = "none";
       } else {
         this.listAddContainer.style.display = "block";
+      }
+    });
+  }
+
+  setChangeTextareaEvent() {
+    this.todoAddTextArea = $(`#list-add-textarea-${this.listIdx}`);
+    this.todoAddTextArea.addEventListener("keyup", e => {
+      if (!!e.target.value.length) {
+        this.listAddContainer.style.opacity = 1;
+      } else {
+        this.listAddContainer.style.opacity = 0.7;
       }
     });
   }
@@ -46,7 +57,7 @@ class List {
         </div>
         <div id="todo-container-${this.listIdx}" class="todo-container">
           <div id="list-add-container-${this.listIdx}" class="list-add-container">
-            <textarea class="list-add-textarea"></textarea>
+            <textarea id="list-add-textarea-${this.listIdx}" class="list-add-textarea" placeholder="Enter a note"></textarea>
             <div class="list-add-button-container">
               <span id="list-add-add-button-${this.listIdx}" class="list-add-add-button">Add</span>
               <span id="list-add-cancel-button-${this.listIdx}" class="list-add-cancel-button">Cancel</span>
