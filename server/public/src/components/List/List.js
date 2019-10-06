@@ -32,7 +32,13 @@ class List {
           <span class="list-delete-button"></span>
         </div>
         <div id="todo-container-${this.listIdx}" class="todo-container">
-
+          <div id="list-add-container-{this.listIdx}" class="list-add-container">
+            <textarea class="list-add-textarea"></textarea>
+            <div class="list-add-button-container">
+              <span class="list-add-add-button">Add</span>
+              <span class="list-add-cancel-button">Cancel</span>
+            </div>
+          </div>
         </div>
       </div>
       `
