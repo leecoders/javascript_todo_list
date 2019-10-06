@@ -85,6 +85,7 @@
 }
 
 .list-add-container {
+  display: none;
   position: relative;
   margin: 0.5rem auto;
   width: 18rem;

@@ -7,8 +7,8 @@ class List {
     this.listIdx = listIdx;
     this.todoLength = 3; // for testing
     this.render();
-
-    this.doTest();
+    this.setPlusTodoEvent();
+    this.this.doTest();
   }
 
   doTest() {
@@ -16,6 +16,19 @@ class List {
     for (let i = 0; i < this.todoLength; ++i) {
       todoArray.push(new Todo($("#todo-container-" + this.listIdx), i));
     }
+  }
+
+  setPlusTodoEvent() {
+    this.listAddContainer = $(`#list-add-container-${this.listIdx}`);
+    this.listPlusButton = $(`#list-plus-button-${this.listIdx}`);
+    console.log(this.listAddContainer);
+    this.listPlusButton.addEventListener("click", () => {
+      if (this.listAddContainer.style.display === "block") {
+        this.listAddContainer.style.display = "none";
+      } else {
+        this.listAddContainer.style.display = "block";
+      }
+    });
   }
 
   render() {
@@ -28,15 +41,15 @@ class List {
             ${this.todoLength}
           </span>
           <span class="list-title">리스트 타이틀</span>
-          <span class="list-plus-button"></span>
-          <span class="list-delete-button"></span>
+          <span id="list-plus-button-${this.listIdx}" class="list-plus-button"></span>
+          <span id="list-delete-button-${this.listIdx}" class="list-delete-button"></span>
         </div>
         <div id="todo-container-${this.listIdx}" class="todo-container">
-          <div id="list-add-container-{this.listIdx}" class="list-add-container">
+          <div id="list-add-container-${this.listIdx}" class="list-add-container">
             <textarea class="list-add-textarea"></textarea>
             <div class="list-add-button-container">
-              <span class="list-add-add-button">Add</span>
-              <span class="list-add-cancel-button">Cancel</span>
+              <span id="list-add-add-button-${this.listIdx}" class="list-add-add-button">Add</span>
+              <span id="list-add-cancel-button-${this.listIdx}" class="list-add-cancel-button">Cancel</span>
             </div>
           </div>
         </div>
