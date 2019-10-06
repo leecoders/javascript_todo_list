@@ -9,7 +9,6 @@
   border: 1px solid #ced4da;
   border-radius: 0.5rem;
   overflow-x: hidden;
-  overflow-y: scroll;
 }
 
 .list-title-container {
@@ -25,7 +24,8 @@
 .todo-container {
   position: relative;
   width: 20rem;
-  height: auto;
+  height: 100%;
+  overflow: scroll;
 }
 
 .todo-counter {
@@ -110,6 +110,9 @@
   font-size: 1rem;
   font-weight: normal;
   min-height: 1.5rem;
+}
+.list-add-textarea:focus {
+  border: 1px solid #f45252;
 }
 
 .list-add-button-container {

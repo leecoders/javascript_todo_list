@@ -5,7 +5,7 @@ class List {
   constructor(parentElement, listIdx) {
     this.parentElement = parentElement;
     this.listIdx = listIdx;
-    this.todoLength = 3; // for testing
+    this.todoLength = 10; // for testing
     this.render();
     this.setPlusTodoEvent();
     this.setChangeTextareaEvent();
