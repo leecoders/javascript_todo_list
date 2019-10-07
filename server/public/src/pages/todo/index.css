@@ -35,16 +35,6 @@ body {
   height: 100%;
 }
 
-/* .body-area {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-} */
-
 .slide-container {
   position: absolute;
   top: 0;
@@ -52,4 +42,11 @@ body {
   width: 30rem;
   height: 100%;
   transition: right 0.3s;
+}
+
+.todo-wrapper.dragging {
+  position: fixed;
+  border: 1px solid #f45252;
+  opacity: 0.9;
+  pointer-events: none;
 }

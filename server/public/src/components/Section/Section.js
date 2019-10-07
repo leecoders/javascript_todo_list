@@ -20,14 +20,13 @@ class Section {
     }
   }
 
-  // setListMouseEnterEvent() {
-  //   $("section").addEventListener("mouseenter", e => {
-  //     const target = e.target;
-  //     const list = findAncestorsElement(target, "todo-container");
-  //     // if (list.className !== "todo-container") return;
-  //     console.log(list);
-  //   });
-  // }
+  setListMouseEnterEvent() {
+    this.listArray.forEach((list, idx) => {
+      $(`#todo-container-${idx}`).addEventListener("mouseenter", e => {
+        if (!this.dragTarget) return;
+      });
+    });
+  }
 
   setTodoDragEvent() {
     $("section").addEventListener("mousedown", e => {
@@ -43,8 +42,7 @@ class Section {
       this.dragTarget = todo.cloneNode(true);
       this.dragTarget.style.left = this.dragTodoX + "px";
       this.dragTarget.style.top = this.dragTodoY + "px"; // margin-top 보정
-      this.dragTarget.style.position = "fixed";
-      this.dragTarget.style.opacity = "0.9";
+      this.dragTarget.classList.add("dragging");
       this.todo = todo;
       todo.style.opacity = "0.5";
       $("section").appendChild(this.dragTarget);
@@ -55,6 +53,8 @@ class Section {
       const relativeY = e.clientY - this.dragStartY;
       this.dragTarget.style.left = this.dragTodoX + relativeX + "px";
       this.dragTarget.style.top = this.dragTodoY + relativeY + "px";
+      e.stopPropagation();
+      e.preventDefault();
     });
     $("section").addEventListener("mouseup", e => {
       if (!this.dragTarget) return;
