@@ -7,6 +7,10 @@ class Todo {
     this.render();
   }
 
+  getElement() {
+    return $(`#todo-wrapper-${this.todoIdx}`);
+  }
+
   render() {
     this.parentElement.insertAdjacentHTML(
       "beforeend",

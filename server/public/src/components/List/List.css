@@ -2,29 +2,36 @@
   position: relative;
   display: inline-block;
   top: 3.2rem;
-  width: 20rem;
+  width: 23rem;
   height: 88%;
-  margin: 0.3rem;
+  margin: 0.5rem;
   background: #f2f2f2;
   border: 1px solid #ced4da;
   border-radius: 0.5rem;
   overflow: hidden;
 }
 
+.list-head-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: auto;
+}
+
 .list-title-container {
   position: relative;
   display: flex;
-  width: 20rem;
-  height: 1.5rem;
+  width: 23rem;
+  height: auto;
   padding: 1rem 0 0 1rem;
+  margin-bottom: 0.5rem;
   color: #24292e;
   font-weight: bold;
 }
 
 .todo-container {
   position: relative;
-  width: 20rem;
-  height: 100%;
+  width: 23rem;
   overflow: scroll;
 }
 
@@ -49,7 +56,7 @@
 .list-plus-button {
   position: relative;
   top: -0.2rem;
-  left: 7.8rem;
+  left: 10.3rem;
   width: 1.2rem;
   height: 1.2rem;
   background: url("../../images/plus.png") no-repeat 50% 50%;
@@ -67,7 +74,7 @@
 .list-delete-button {
   position: relative;
   top: -0.2rem;
-  left: 7.8rem;
+  left: 10.3rem;
   width: 1.3rem;
   height: 1.3rem;
   margin-left: 0.5rem;
@@ -87,19 +94,18 @@
 .list-add-container {
   display: none;
   position: relative;
-  margin: 0.5rem auto;
-  width: 18rem;
+  margin: 0 auto 1rem auto;
+  width: 20.5rem;
   height: auto;
   font-size: 1rem;
   color: #24292e;
-  margin-bottom: 1.3rem;
   opacity: 0.7;
 }
 
 .list-add-textarea {
   position: relative;
   left: -0.55rem;
-  width: 18rem;
+  width: 20.5rem;
   height: 2.5rem;
   resize: vertical;
   border: 1px solid #dee2e6;
@@ -118,7 +124,7 @@
 .list-add-button-container {
   position: relative;
   left: -0.55rem;
-  width: 19rem;
+  width: 21.5rem;
   height: 2rem;
 }
 
@@ -126,7 +132,7 @@
 .list-add-cancel-button {
   position: relative;
   display: inline-block;
-  width: 9.1rem;
+  width: 10.3rem;
   height: 2.3rem;
   border: 1px solid #ced4da;
   border-radius: 0.5rem;

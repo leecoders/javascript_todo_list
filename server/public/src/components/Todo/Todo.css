@@ -1,7 +1,7 @@
 .todo-wrapper {
   position: relative;
   margin: 0.5rem auto;
-  width: 18rem;
+  width: 20.5rem;
   height: auto;
   min-height: 2rem;
   border: 1px solid #dee2e6;
@@ -33,7 +33,7 @@
 .todo-content-container {
   position: relative;
   left: 1.8rem;
-  width: 15rem;
+  width: 17.5rem;
   height: auto;
   word-break: break-all;
 }

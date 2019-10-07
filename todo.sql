@@ -104,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `todo`.`TODO` (
   `TODO_ID` INT NOT NULL AUTO_INCREMENT,
   `TODO_CONTENT` VARCHAR(2048) NOT NULL,
   `TODO_BELONG_LIST` INT NOT NULL,
+  `TODO_ORDER` INT,
   PRIMARY KEY (`TODO_ID`, `TODO_BELONG_LIST`),
   INDEX `fk_TODO_LIST1_idx` (`TODO_BELONG_LIST` ASC) ,
   CONSTRAINT `fk_TODO_LIST1`
@@ -167,15 +168,15 @@ insert into LIST values(null, 'todo', 2); -- 4
 insert into LIST values(null, 'doing', 2); -- 5
 insert into LIST values(null, 'done', 2); -- 6
 
-insert into TODO values(null, 'eating dinner', 1);
-insert into TODO values(null, 'stretching', 2);
-insert into TODO values(null, 'sleep', 3);
-insert into TODO values(null, 'eating dinner', 4);
-insert into TODO values(null, 'stretching', 5);
-insert into TODO values(null, 'sleep', 6);
+insert into TODO(TODO_CONTENT, TODO_BELONG_LIST, TODO_ORDER) values('eating dinner', 1, 0);
+insert into TODO(TODO_CONTENT, TODO_BELONG_LIST, TODO_ORDER) values('stretching', 2, 1);
+insert into TODO(TODO_CONTENT, TODO_BELONG_LIST, TODO_ORDER) values('sleep', 3, 2);
+insert into TODO(TODO_CONTENT, TODO_BELONG_LIST, TODO_ORDER) values('eating dinner', 4, 0);
+insert into TODO(TODO_CONTENT, TODO_BELONG_LIST, TODO_ORDER) values('stretching', 5, 1);
+insert into TODO(TODO_CONTENT, TODO_BELONG_LIST, TODO_ORDER) values('sleep', 6, 2);
 
-insert into ACTIVITY values(null, 'moved', '1998-12-31 23:59:59', 'admin', 'doing', 'todo', 1, 1);
-insert into ACTIVITY values(null, 'added', '1998-12-31 22:00:00', 'normal', null, 'doing', 1, 1);
-insert into ACTIVITY values(null, 'added', '1998-12-31 22:00:00', 'normal', null, 'doing', 1, 2);
-insert into ACTIVITY values(null, 'added', '1998-12-31 22:00:00', 'normal', null, 'done', 1, 3);
+insert into ACTIVITY values(null, 'moved', '2018-12-31 23:59:59', 'admin', 'doing', 'todo', 1, 1);
+insert into ACTIVITY values(null, 'added', '2018-12-31 22:00:00', 'normal', null, 'doing', 1, 1);
+insert into ACTIVITY values(null, 'added', '2018-12-31 22:00:00', 'normal', null, 'doing', 1, 2);
+insert into ACTIVITY values(null, 'added', '2018-12-31 22:00:00', 'normal', null, 'done', 1, 3);
 

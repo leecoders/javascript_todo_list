@@ -6,8 +6,10 @@ class Section {
   constructor(parentElement) {
     this.parentElement = parentElement;
     this.listLength = 5; // for testing
+    this.dragTarget;
     this.render();
     this.doTest();
+    // this.setTodoDragEvent();
   }
 
   doTest() {
@@ -16,6 +18,15 @@ class Section {
       listArray.push(new List($(".list-container"), i));
     }
   }
+
+  // setTodoDragEvent() {
+  //   $("section").addEventListener("mousedown", e => {
+  //     const target = e.target;
+  //     if (target.className === "todo-wrapper") {
+  //       this.dragTarget = target;
+  //     }
+  //   });
+  // }
 
   render() {
     this.parentElement.innerHTML = /*html*/ `
