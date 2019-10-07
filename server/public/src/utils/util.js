@@ -14,4 +14,9 @@ const isOutSideOfLayerClicked = (layer, e) => {
   return false;
 };
 
-export { $, isOutSideOfLayerClicked };
+const findAncestorsElement = (now, targetClassName) => {
+  if (now.className === targetClassName || now === document.body) return now;
+  return findAncestorsElement(now.parentNode, targetClassName);
+};
+
+export { $, isOutSideOfLayerClicked, findAncestorsElement };

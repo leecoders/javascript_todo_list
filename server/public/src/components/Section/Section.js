@@ -1,4 +1,4 @@
-import { $ } from "../../utils/util.js";
+import { $, findAncestorsElement } from "../../utils/util.js";
 import { Modal } from "../Modal/Modal.js";
 import { List } from "../List/List.js";
 
@@ -8,25 +8,26 @@ class Section {
     this.listLength = 5; // for testing
     this.dragTarget;
     this.render();
-    this.doTest();
-    // this.setTodoDragEvent();
+    this.setLists();
+    this.setTodoDragEvent();
   }
 
-  doTest() {
-    let listArray = [];
+  setLists() {
+    this.listArray = [];
     for (let i = 0; i < this.listLength; ++i) {
-      listArray.push(new List($(".list-container"), i));
+      this.listArray.push(new List($(".list-container"), i));
     }
   }
 
-  // setTodoDragEvent() {
-  //   $("section").addEventListener("mousedown", e => {
-  //     const target = e.target;
-  //     if (target.className === "todo-wrapper") {
-  //       this.dragTarget = target;
-  //     }
-  //   });
-  // }
+  setTodoDragEvent() {
+    $("section").addEventListener("mousedown", e => {
+      const target = e.target;
+      console.log(findAncestorsElement(target, "todo-wrapper"));
+      // if (target.className === "todo-wrapper") {
+      //   this.dragTarget = target;
+      // }
+    });
+  }
 
   render() {
     this.parentElement.innerHTML = /*html*/ `

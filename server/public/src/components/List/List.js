@@ -13,13 +13,13 @@ class List {
     this.setTodoContainerSize();
     this.setPlusTodoEvent();
     this.setChangeTextareaEvent();
-    this.doTest();
+    this.setTodos();
   }
 
-  doTest() {
-    let todoArray = [];
+  setTodos() {
+    this.todoArray = [];
     for (let i = 0; i < this.todoLength; ++i) {
-      todoArray.push(new Todo($("#todo-container-" + this.listIdx), i));
+      this.todoArray.push(new Todo($("#todo-container-" + this.listIdx), i));
     }
   }
 
@@ -27,7 +27,6 @@ class List {
     const heightSum = this.listWrapper.getBoundingClientRect().height;
     const heightHead = this.listHead.getBoundingClientRect().height;
     this.todoContainer.style.height = heightSum - heightHead + "px";
-    console.log(this.todoContainer.style.height);
   }
 
   setPlusTodoEvent() {
