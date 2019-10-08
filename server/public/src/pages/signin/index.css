@@ -3,7 +3,7 @@ body {
   color: #ff8787;
   height: 100%;
   width: 100%;
-  font-family: Nanum Gothic;
+  font-family: "Nanum Gothic", sans-serif;
 }
 
 section {
