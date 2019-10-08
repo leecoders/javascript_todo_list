@@ -20,7 +20,7 @@ router.use("/get-todos", async (req, res) => {
 });
 
 router.use("/user-info", async (req, res) => {
-  const userInfo = req.user;
+  const userInfo = req.user; // 세션에 저장된 user 정보 제공
   res.send(userInfo);
 });
 

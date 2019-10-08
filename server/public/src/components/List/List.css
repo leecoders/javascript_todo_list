@@ -54,9 +54,9 @@
 }
 
 .list-plus-button {
-  position: relative;
-  top: -0.2rem;
-  left: 10.3rem;
+  position: absolute;
+  top: 0.9rem;
+  right: 3.5rem;
   width: 1.2rem;
   height: 1.2rem;
   background: url("../../images/plus.png") no-repeat 50% 50%;
@@ -72,9 +72,9 @@
 }
 
 .list-delete-button {
-  position: relative;
-  top: -0.2rem;
-  left: 10.3rem;
+  position: absolute;
+  top: 0.8rem;
+  right: 1.8rem;
   width: 1.3rem;
   height: 1.3rem;
   margin-left: 0.5rem;
