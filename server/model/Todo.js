@@ -22,7 +22,7 @@ class Todo {
     try {
       const connection = await pool.getConnection(async conn => conn);
       const [rows] = await connection.query(
-        `select LIST_ID, LIST_NAME from BOARD where LIST_BELONG_BOARD=?`,
+        `select LIST_ID, LIST_NAME from LIST where LIST_BELONG_BOARD=?`,
         [boardId]
       );
       connection.release();
@@ -37,7 +37,7 @@ class Todo {
     try {
       const connection = await pool.getConnection(async conn => conn);
       const [rows] = await connection.query(
-        `select TODO_ID, TODO_CONTENT, TODO_BELONG_LIST, TODO_ADDED_BY from TODO where TODO_BELONG_LIST=?`,
+        `select TODO_ID, TODO_ORDER, TODO_CONTENT, TODO_ADDED_BY from TODO where TODO_BELONG_LIST=?`,
         [listId]
       );
       connection.release();

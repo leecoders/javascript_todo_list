@@ -13,21 +13,76 @@ class Section {
     this.userId = userId;
     this.listLength = 3; // for testing
     this.dragTarget;
-    this.boardsData;
+    this.boardsData = []; // 보드 데이터 객체 배열(현재는 길이 1)
+    // 현재 유저 당 보드 1개 -> 추후 여러 개 보드 선택하는 기능 추가 예정
     this.init();
   }
   async init() {
     this.render();
-    await this.getBoardsData();
+    await this.setBoardsData();
     this.setLists();
     this.setTodoDragEvent();
     this.setListMouseEnterEvent();
     this.setTodoMouseEnterEvent();
   }
 
-  async getBoardsData() {
+  async setBoardsData() {
     const result = await fetchBoardsByUserId(this.userId);
-    console.log(result);
+    if (result.message !== "success") {
+      // 에러
+      console.log(result.message);
+      return;
+    }
+    this.boardsData = Array.prototype.map.call(result.data, board => {
+      return {
+        id: board.BOARD_ID,
+        name: board.BOARD_NAME,
+        writable: board.BOARD_WRITE_PERMISSION,
+        readable: board.BOARD_READ_PERMISSION,
+        lists: []
+      };
+    });
+    this.boardsData.forEach(async board => {
+      board.lists = await this.getListsData(board.id);
+    });
+    console.log(this.boardsData);
+  }
+
+  async getListsData(boardId) {
+    const result = await fetchListsByBoardId(boardId);
+    if (result.message !== "success") {
+      // 에러
+      console.log(result.message);
+      return;
+    }
+    const listsData = Array.prototype.map.call(result.data, list => {
+      return {
+        id: list.LIST_ID,
+        name: list.LIST_NAME,
+        todos: []
+      };
+    });
+    listsData.forEach(async list => {
+      list.todos = await this.getTodosData(list.id);
+    });
+    return listsData;
+  }
+
+  async getTodosData(listId) {
+    const result = await fetchTodosByListId(listId);
+    if (result.message !== "success") {
+      // 에러
+      console.log(result.message);
+      return;
+    }
+    return Array.prototype.map.call(result.data, todo => {
+      return {
+        id: todo.TODO_ID,
+        order: todo.TODO_ORDER,
+        content: todo.TODO_CONTENT,
+        addedBy: todo.TODO_ADDED_BY
+      };
+    });
   }
 
   setLists() {

@@ -30,13 +30,17 @@
 ```javascript
 const boards = [
     board {
+        id : "board_id",
         name : "board_name",
+        writable : "board_write_permission",
+        readable : "board_read_permission",
         lists : [
             list {
+                id : "list_id",
                 name : "list_name",
                 cards : [
                     card {
-                        name : "card_name",
+                        id : "card_id",
                         order : "card_order_in_list",
                         content : "card_content",
                         addedBy : "user_id"
