@@ -32,7 +32,7 @@
 .todo-container {
   position: relative;
   width: 23rem;
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .todo-counter {
