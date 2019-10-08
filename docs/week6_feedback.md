@@ -39,3 +39,6 @@ Array.prototype.forEach.call(
 - 아니면 `nextSibling.nextSibling` 으로 표현하면 제대로 객체를 반환한다. 
 - 따라서 `nextElementSibling`을 사용하는 것이 좋다.
 [참고](https://iamawebdeveloper.tistory.com/58)
+
+### `element.cloneNode(true)`로 엘리먼트 복사 후에는 참조값이 생기며 `remove`해도 HTML에서 사라지지만 참조가 undefined가 되지 않는다.
+- `remove` -> `appendChild` -> ... 재사용 가능!

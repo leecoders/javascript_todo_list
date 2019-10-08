@@ -25,15 +25,13 @@ class Section {
     Array.prototype.forEach.call(
       document.querySelectorAll(".todo-wrapper"),
       todo => {
-        // console.log(todo);
         todo.addEventListener("mousemove", e => {
           if (!this.dragTarget) return;
-          if (todo === this.todo) return;
+          if (todo === this.todo) return; // this.todo(드래그 source)가 이벤트를 받으면 안됨
           const todoContainer = todo.parentNode;
           const mouseY = e.clientY;
           const top = todo.getBoundingClientRect().top;
           const bottom = todo.getBoundingClientRect().bottom;
-          // this.todo.style.pointerEvents = "none";
           this.todo.remove();
           if (mouseY - top > bottom - mouseY) {
             if (!!todo.nextElementSibling) {
