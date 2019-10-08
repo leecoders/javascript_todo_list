@@ -11,9 +11,8 @@ class Section {
   constructor(parentElement, userId) {
     this.parentElement = parentElement;
     this.userId = userId;
-    this.listLength = 3; // for testing
     this.dragTarget;
-    this.boardsData = []; // 보드 데이터 객체 배열(현재는 길이 1)
+    this.boardsData; // 보드 데이터 객체 배열(현재는 길이 1)
     // 현재 유저 당 보드 1개 -> 추후 여러 개 보드 선택하는 기능 추가 예정
     this.init();
   }
@@ -42,13 +41,12 @@ class Section {
         lists: []
       };
     });
-    this.boardsData.forEach(async board => {
-      board.lists = await this.getListsData(board.id);
-    });
-    console.log(this.boardsData);
+    for (const board of this.boardsData) {
+      board.lists = await this.setListsData(board.id);
+    }
   }
 
-  async getListsData(boardId) {
+  async setListsData(boardId) {
     const result = await fetchListsByBoardId(boardId);
     if (result.message !== "success") {
       // 에러
@@ -62,13 +60,13 @@ class Section {
         todos: []
       };
     });
-    listsData.forEach(async list => {
-      list.todos = await this.getTodosData(list.id);
-    });
+    for (const list of listsData) {
+      list.todos = await this.setTodosData(list.id);
+    }
     return listsData;
   }
 
-  async getTodosData(listId) {
+  async setTodosData(listId) {
     const result = await fetchTodosByListId(listId);
     if (result.message !== "success") {
       // 에러
@@ -85,10 +83,11 @@ class Section {
     });
   }
 
-  setLists() {
+  async setLists(board = this.boardsData[0]) {
+    // 현재는 유저 당 보드 1개 -> 업데이트 예정
     this.listArray = [];
-    for (let i = 0; i < this.listLength; ++i) {
-      this.listArray.push(new List($(".list-container"), i));
+    for (let i = 0; i < board.lists.length; ++i) {
+      this.listArray.push(new List($(".list-container"), i, board.lists[i]));
     }
   }
 

@@ -1,14 +1,14 @@
 import { $ } from "../../utils/util.js";
 
 class Todo {
-  constructor(parentElement, todoIdx) {
+  constructor(parentElement, todo) {
     this.parentElement = parentElement;
-    this.todoIdx = todoIdx;
+    this.todo = todo;
     this.render();
   }
 
   getElement() {
-    return $(`#todo-wrapper-${this.todoIdx}`);
+    return $(`#todo-wrapper-${this.todo.order}`);
   }
 
   // this.todoIdx가 아닌 DB에 저장된 실제 todo 카드의 아이디를 DOM 아이디로 사용하도록 변경할 필요가 있음
@@ -16,7 +16,7 @@ class Todo {
     this.parentElement.insertAdjacentHTML(
       "beforeend",
       /*html*/ `
-      <div id="todo-wrapper-${this.todoIdx}" class="todo-wrapper">
+      <div id="todo-wrapper-${this.todo.id}" class="todo-wrapper">
         <div class="todo-text-image"></div>
         <div class="todo-content-container">
           <div class="todo-content">sdfsasdfdsaklfhjsdlajflkdsjflksdjflkdf</div>
@@ -25,7 +25,7 @@ class Todo {
             <span class="added-by-id">leecoders</span>
           </div>
         </div>
-        <div id="todo-delete-button-${this.todoIdx}" class="todo-delete-button"></div>
+        <div id="todo-delete-button-${this.todo.id}" class="todo-delete-button"></div>
       </div>
       `
     );

@@ -2,10 +2,10 @@ import { $ } from "../../utils/util.js";
 import { Todo } from "../Todo/Todo.js";
 
 class List {
-  constructor(parentElement, listIdx) {
+  constructor(parentElement, listIdx, list) {
     this.parentElement = parentElement;
     this.listIdx = listIdx;
-    this.todoLength = 4; // for testing
+    this.list = list;
     this.render();
     this.listWrapper = $(`#list-wrapper-${this.listIdx}`);
     this.listHead = $(`#list-head-${this.listIdx}`);
@@ -18,8 +18,10 @@ class List {
 
   setTodos() {
     this.todoArray = [];
-    for (let i = 0; i < this.todoLength; ++i) {
-      this.todoArray.push(new Todo($("#todo-container-" + this.listIdx), i));
+    for (let i = 0; i < this.list.todos.length; ++i) {
+      this.todoArray.push(
+        new Todo($("#todo-container-" + this.listIdx), this.list.todos[i])
+      );
     }
   }
 

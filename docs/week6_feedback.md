@@ -42,3 +42,31 @@ Array.prototype.forEach.call(
 
 ### `element.cloneNode(true)`로 엘리먼트 복사 후에는 참조값이 생기며 `remove`해도 HTML에서 사라지지만 참조가 undefined가 되지 않는다.
 - `remove` -> `appendChild` -> ... 재사용 가능!
+
+### async / await 관련 이슈
+- 문제 내용
+![뭐지?](https://user-images.githubusercontent.com/47619140/66378891-67d55300-e9ef-11e9-983e-7172a85692d1.png)
+`todos: Array(0)`인데 까보면 들어 있다?!
+
+- 문제의 코드 일부
+```javascript
+async function foo() {
+    await ... // resolved를 기다려야 하는 부분
+    listsData.forEach(async list => {
+        list.todos = await this.setTodosData(list.id); // resolved를 기다릴 것으로 예상했던 부분
+    });
+}
+await foo();
+console.log(list);
+```
+두 번째 `await`를 기다리지 않았다..
+
+- 문제의 원인
+  - `forEach`의 callback이 `async` 함수로, 내부의 await를 기다리지만 `listsData`의 길이 만큼 호출되는 callback 자체를 `await`하는 부분은 `forEach`의 내부에 존재해야 하지만 `Array.prototype.forEach`는 `async`를 고려하고 만들어지지 않았기 때문에 `foo()`는 `forEach`를 기다리지 않고 종료된다.
+  - 그럼 개발자 도구의 결과는 왜 저럴까?
+    - 예상보다 빨리 종료된 `foo()`에 의해 `console.log(list);`가 먼저 실행되었다. 하지만 `foo()`의 `forEach`의 callback은 `this`라는 참조를 갖고 있기 때문에 `console.log(list);`가 실행되고 난 후에 입력된 것 같다(?)
+    - 하지만 개발자 도구가 너무 똑똑해서 `console.log()`의 출력과 다르게 객체 내부를 보여주는 것 같다. 아마도..
+
+- 문제의 해결 : `for-of`문으로 해결(callback이 없음)
+
+- 회고 : 문제의 시작은 `함수형 프로그래밍`을 제대로 하지 못해서 `side effect`가 생길 만한 충분한 조건이 있었다고 생각한다. (`this`를 `forEach`내부적으로 접근하는 것은 함수형이 아님..) 그리고 생각보다 `for-of`가 유용하게 사용된다.
