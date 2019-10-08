@@ -11,13 +11,6 @@
   color: #24292e;
   cursor: move;
 }
-.todo-wrapper:hover {
-  border: 1px solid #ff8787;
-  box-shadow: 0 3px 3px rgba(27, 31, 35, 0.1);
-}
-.todo-wrapper:active {
-  border: 1px solid #f45252;
-}
 
 .todo-text-image {
   position: absolute;

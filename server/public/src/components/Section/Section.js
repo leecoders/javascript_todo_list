@@ -5,12 +5,13 @@ import { List } from "../List/List.js";
 class Section {
   constructor(parentElement) {
     this.parentElement = parentElement;
-    this.listLength = 5; // for testing
+    this.listLength = 3; // for testing
     this.dragTarget;
     this.render();
     this.setLists();
     this.setTodoDragEvent();
     this.setListMouseEnterEvent();
+    this.setTodoMouseEnterEvent();
   }
 
   setLists() {
@@ -20,10 +21,41 @@ class Section {
     }
   }
 
+  setTodoMouseEnterEvent() {
+    Array.prototype.forEach.call(
+      document.querySelectorAll(".todo-wrapper"),
+      todo => {
+        // console.log(todo);
+        todo.addEventListener("mousemove", e => {
+          if (!this.dragTarget) return;
+          if (todo === this.todo) return;
+          const todoContainer = todo.parentNode;
+          const mouseY = e.clientY;
+          const top = todo.getBoundingClientRect().top;
+          const bottom = todo.getBoundingClientRect().bottom;
+          // this.todo.style.pointerEvents = "none";
+          this.todo.remove();
+          if (mouseY - top > bottom - mouseY) {
+            if (!!todo.nextElementSibling) {
+              todoContainer.insertBefore(this.todo, todo.nextElementSibling);
+            } else {
+              todoContainer.appendChild(this.todo);
+            }
+          } else {
+            todoContainer.insertBefore(this.todo, todo);
+          }
+        });
+      }
+    );
+  }
+
   setListMouseEnterEvent() {
     this.listArray.forEach((list, idx) => {
       $(`#todo-container-${idx}`).addEventListener("mouseenter", e => {
         if (!this.dragTarget) return;
+        const target = e.target;
+        this.todo.remove(); // 지워도 변수에 DOM이 남아있다!
+        target.appendChild(this.todo); // 그래서 재사용 가능! (또 remove하면 참조가 남아서 또 지워짐!)
       });
     });
   }
@@ -58,6 +90,7 @@ class Section {
     });
     $("section").addEventListener("mouseup", e => {
       if (!this.dragTarget) return;
+      this.todo.style.opacity = "1";
       this.dragTarget.remove();
       this.dragTarget = undefined;
     });

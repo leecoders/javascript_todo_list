@@ -5,7 +5,7 @@ class List {
   constructor(parentElement, listIdx) {
     this.parentElement = parentElement;
     this.listIdx = listIdx;
-    this.todoLength = 11; // for testing
+    this.todoLength = 4; // for testing
     this.render();
     this.listWrapper = $(`#list-wrapper-${this.listIdx}`);
     this.listHead = $(`#list-head-${this.listIdx}`);
