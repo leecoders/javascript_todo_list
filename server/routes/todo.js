@@ -5,17 +5,17 @@ const Todo = new (require("../model/Todo.js"))();
 const { checkTodo } = require("../middlewares/middlewares.js");
 
 router.use("/get-boards", async (req, res) => {
-  const { userId } = req.user;
+  const { userId } = req.body;
   Todo.getBoardsByUserId(userId, res);
 });
 
 router.use("/get-lists", async (req, res) => {
-  const { boardId } = req.user;
+  const { boardId } = req.body;
   Todo.getListsByBoardId(boardId, res);
 });
 
 router.use("/get-todos", async (req, res) => {
-  const { listId } = req.user;
+  const { listId } = req.body;
   Todo.getTodosByListId(listId, res);
 });
 

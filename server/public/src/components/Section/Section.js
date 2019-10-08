@@ -1,17 +1,33 @@
 import { $, findAncestorsElement } from "../../utils/util.js";
+import {
+  fetchBoardsByUserId,
+  fetchListsByBoardId,
+  fetchTodosByListId
+} from "../../utils/fetchTodo.js";
 import { Modal } from "../Modal/Modal.js";
 import { List } from "../List/List.js";
 
 class Section {
-  constructor(parentElement) {
+  constructor(parentElement, userId) {
     this.parentElement = parentElement;
+    this.userId = userId;
     this.listLength = 3; // for testing
     this.dragTarget;
+    this.boardsData;
+    this.init();
+  }
+  async init() {
     this.render();
+    await this.getBoardsData();
     this.setLists();
     this.setTodoDragEvent();
     this.setListMouseEnterEvent();
     this.setTodoMouseEnterEvent();
+  }
+
+  async getBoardsData() {
+    const result = await fetchBoardsByUserId(this.userId);
+    console.log(result);
   }
 
   setLists() {

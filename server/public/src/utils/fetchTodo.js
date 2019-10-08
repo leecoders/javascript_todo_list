@@ -12,9 +12,10 @@ const fetchUserInfo = () => {
     .catch(error => "error");
 };
 
-const fetchBoardsByUserId = () => {
+const fetchBoardsByUserId = userId => {
   return fetch(serverUrl + "todo/get-boards", {
     method: "POST",
+    body: JSON.stringify({ userId }),
     headers: {
       "Content-Type": "application/json"
     }
@@ -24,9 +25,10 @@ const fetchBoardsByUserId = () => {
     .catch(error => "error");
 };
 
-const fetchListsByBoardId = () => {
+const fetchListsByBoardId = boardId => {
   return fetch(serverUrl + "todo/get-lists", {
     method: "POST",
+    body: JSON.stringify({ boardId }),
     headers: {
       "Content-Type": "application/json"
     }
@@ -36,9 +38,10 @@ const fetchListsByBoardId = () => {
     .catch(error => "error");
 };
 
-const fetchTodosByListId = () => {
+const fetchTodosByListId = listId => {
   return fetch(serverUrl + "todo/get-todos", {
     method: "POST",
+    body: JSON.stringify({ listId }),
     headers: {
       "Content-Type": "application/json"
     }

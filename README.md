@@ -18,14 +18,15 @@
 
 ![DB_EER](https://user-images.githubusercontent.com/47619140/65963472-c3568c80-e495-11e9-99f2-8eee70e03572.png)
 
-### 보드 ,리스트, 카드 데이터 객체화 시나리오
+## 보드 ,리스트, 카드 데이터 객체화 시나리오
 
-1. BOARD 다 가져오기 -> 하나씩 순회
+### 가져오기
+1. USER_ID에 대한 BOARD 다 가져오기(지금은 1개) -> 하나씩 순회
 2. 1번에서 가져온 `BOARD_ID = LIST_BELONG_BOARD`인 LIST_ID 다 가져오기
 3. 2번에서 가져온 `LIST_ID = TODO_BELONG_LIST`인 TODO_ID 다 가져오기
 4. 1, 2, 3번에서 가져온 데이터 BOARD 기준으로 객체로 묶기
 
-- 보드 데이터 객체 구조
+### 보드 데이터 객체 구조
 ```javascript
 const boards = [
     board {
@@ -36,8 +37,11 @@ const boards = [
                 cards : [
                     card {
                         name : "card_name",
-                        
-                    }
+                        order : "card_order_in_list",
+                        content : "card_content",
+                        addedBy : "user_id"
+                    },
+                    ...
                 ]
             },
             ...
