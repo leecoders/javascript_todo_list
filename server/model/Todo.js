@@ -11,7 +11,7 @@ class Todo {
         [userId]
       );
       connection.release();
-      if (rows.length) return res.json(rows);
+      if (rows.length) return res.json({ message: "success", data: rows });
       else res.json({ message: "failure" });
     } catch (err) {
       res.json({ message: "db not connected" });
@@ -26,22 +26,22 @@ class Todo {
         [boardId]
       );
       connection.release();
-      if (rows.length) return res.json(rows);
+      if (rows.length) return res.json({ message: "success", data: rows });
       else res.json({ message: "failure" });
     } catch (err) {
       res.json({ message: "db not connected" });
     }
   }
 
-  async getTodosByListId(ListId, res) {
+  async getTodosByListId(listId, res) {
     try {
       const connection = await pool.getConnection(async conn => conn);
       const [rows] = await connection.query(
         `select TODO_ID, TODO_CONTENT, TODO_BELONG_LIST, TODO_ADDED_BY from TODO where TODO_BELONG_LIST=?`,
-        [ListId]
+        [listId]
       );
       connection.release();
-      if (rows.length) return res.json(rows);
+      if (rows.length) return res.json({ message: "success", data: rows });
       else res.json({ message: "failure" });
     } catch (err) {
       res.json({ message: "db not connected" });

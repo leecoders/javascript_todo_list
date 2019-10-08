@@ -1,7 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const User = new (require("../model/User.js"))();
+const Todo = new (require("../model/Todo.js"))();
 const { checkTodo } = require("../middlewares/middlewares.js");
+
+router.use("/get-boards", async (req, res) => {
+  const { userId } = req.user;
+  Todo.getBoardsByUserId(userId, res);
+});
+
+router.use("/get-lists", async (req, res) => {
+  const { boardId } = req.user;
+  Todo.getListsByBoardId(boardId, res);
+});
+
+router.use("/get-todos", async (req, res) => {
+  const { listId } = req.user;
+  Todo.getTodosByListId(listId, res);
+});
 
 router.use("/user-info", async (req, res) => {
   const userInfo = req.user;
