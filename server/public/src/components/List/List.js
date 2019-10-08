@@ -63,9 +63,9 @@ class List {
         <div id="list-head-${this.listIdx}" class="list-head-container">
           <div class="list-title-container">
             <span id="todo-counter-${this.listIdx}" class="todo-counter">
-              ${this.todoLength}
+              ${this.list.todos.length}
             </span>
-            <span class="list-title">리스트 타이틀</span>
+            <span class="list-title">${this.list.name}</span>
             <span id="list-plus-button-${this.listIdx}" class="list-plus-button"></span>
             <span id="list-delete-button-${this.listIdx}" class="list-delete-button"></span>
           </div>
