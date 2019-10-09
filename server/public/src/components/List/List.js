@@ -49,14 +49,6 @@ class List {
       content: this.todoAddTextArea.value,
       addedBy: this.userId
     };
-    this.todoArray.push(
-      new Todo($("#todo-container-" + this.listIdx), todoObj, {
-        handleDeleteTodoClicked: this.handleDeleteTodoClicked
-      }) // 클라이언트에 todo 추가
-    );
-    this.listCounter.innerText++;
-    this.todoAddTextArea.value = "";
-    this.listAddContainer.style.opacity = 0.7;
     const result = await fetchAddTodo(
       todoObj.order,
       todoObj.content,
@@ -68,10 +60,15 @@ class List {
       console.log(result.message);
       return;
     }
-
-    while (this.todoContainer.hasChildNodes()) {
-      this.todoContainer.removeChild(this.todoContainer.firstChild);
-    }
+    todoObj.id = result.data;
+    this.todoArray.push(
+      new Todo($("#todo-container-" + this.listIdx), todoObj, {
+        handleDeleteTodoClicked: this.handleDeleteTodoClicked
+      }) // 클라이언트에 todo 추가
+    );
+    this.listCounter.innerText++;
+    this.todoAddTextArea.value = "";
+    this.listAddContainer.style.opacity = 0.7;
   }
 
   setTodoContainerSize() {

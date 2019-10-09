@@ -55,8 +55,16 @@ class Todo {
         `insert into TODO(TODO_ORDER, TODO_BELONG_LIST, TODO_CONTENT, TODO_ADDED_BY) values (?, ?, ?, ?)`,
         [+order, +todoBelongList, content, addedBy]
       );
+      const [rows2] = await connection.query(
+        `select TODO_ID from TODO order by TODO_ID`,
+        [+order, +todoBelongList, content, addedBy]
+      );
       connection.release();
-      if (rows.affectedRows) return res.json({ message: "success" });
+      if (rows.affectedRows || rows2.length)
+        return res.json({
+          message: "success",
+          data: rows2[rows2.length - 1].TODO_ID
+        });
       else res.json({ message: "failure" });
     } catch (err) {
       res.json({ message: "db not connected" });
