@@ -83,8 +83,10 @@ class Section {
     });
   }
 
-  async setLists(board = this.boardsData[0]) {
+  async setLists(board) {
     // 현재는 유저 당 보드 1개 -> 업데이트 예정
+    if (!this.boardsData) return;
+    board = this.boardsData[0];
     this.listArray = [];
     for (let i = 0; i < board.lists.length; ++i) {
       this.listArray.push(
@@ -125,6 +127,7 @@ class Section {
   }
 
   setListMouseEnterEvent() {
+    if (!this.listArray) return;
     this.listArray.forEach((list, idx) => {
       $(`#todo-container-${idx}`).addEventListener("mouseenter", e => {
         if (!this.dragTarget) return;
@@ -138,6 +141,7 @@ class Section {
   setTodoDragEvent() {
     $("body").addEventListener("mousedown", e => {
       // 변경 시작 시점
+      if (this.dragTarget) return;
       const target = e.target;
       const todo = findAncestorsElement(target, "todo-wrapper");
       if (todo.className !== "todo-wrapper") return;

@@ -62,6 +62,34 @@ class Todo {
       res.json({ message: "db not connected" });
     }
   }
+
+  // async addDefaultList(userId, res) {
+  //   try {
+  //   const connection = await pool.getConnection(async conn => conn);
+  //   const [rows1] = await connection.query(
+  //     `insert into BOARD(BOARD_NAME, BOARD_OWNER) values (?, ?)`,
+  //     ["투두 타이틀", userId]
+  //   );
+  //   const [rows2] = await connection.query(`select BOARD_ID from BOARD`);
+  //   const [rows3] = await connection.query(
+  //     `insert into LIST(LIST_NAME, LIST_BELONG_BOARD) values (?, ?)`,
+  //     ["todo", rows2.length]
+  //   );
+  //   const [rows4] = await connection.query(
+  //     `insert into LIST(LIST_NAME, LIST_BELONG_BOARD) values (?, ?)`,
+  //     ["doing", rows2.length]
+  //   );
+  //   const [rows5] = await connection.query(
+  //     `insert into LIST(LIST_NAME, LIST_BELONG_BOARD) values (?, ?)`,
+  //     ["done", rows2.length]
+  //   );
+  //     connection.release();
+  //     if (rows.affectedRows) return res.json({ message: "success" });
+  //     else res.json({ message: "failure" });
+  //   } catch (err) {
+  //     res.json({ message: "db not connected" });
+  //   }
+  // }
 }
 
 module.exports = Todo;
