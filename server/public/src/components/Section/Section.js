@@ -129,7 +129,7 @@ class Section {
   }
 
   setTodoDragEvent() {
-    $("section").addEventListener("mousedown", e => {
+    $("body").addEventListener("mousedown", e => {
       const target = e.target;
       const todo = findAncestorsElement(target, "todo-wrapper");
       if (todo.className !== "todo-wrapper") return;
@@ -145,9 +145,9 @@ class Section {
       this.dragTarget.classList.add("dragging");
       this.todo = todo;
       todo.style.opacity = "0.5";
-      $("section").appendChild(this.dragTarget);
+      $("body").appendChild(this.dragTarget);
     });
-    $("section").addEventListener("mousemove", e => {
+    $("body").addEventListener("mousemove", e => {
       if (!this.dragTarget) return;
       const relativeX = e.clientX - this.dragStartX;
       const relativeY = e.clientY - this.dragStartY;
@@ -156,7 +156,7 @@ class Section {
       e.stopPropagation();
       e.preventDefault();
     });
-    $("section").addEventListener("mouseup", e => {
+    $("body").addEventListener("mouseup", e => {
       if (!this.dragTarget) return;
       this.todo.style.opacity = "1";
       this.dragTarget.remove();
