@@ -4,6 +4,11 @@ const User = new (require("../model/User.js"))();
 const Todo = new (require("../model/Todo.js"))();
 const { checkTodo } = require("../middlewares/middlewares.js");
 
+router.use("/add-todo", async (req, res) => {
+  const { order, content, addedBy, todoBelongList } = req.body;
+  Todo.addTodo(order, content, addedBy, todoBelongList, res);
+});
+
 router.use("/get-boards", async (req, res) => {
   const { userId } = req.body;
   Todo.getBoardsByUserId(userId, res);

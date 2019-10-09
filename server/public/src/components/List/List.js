@@ -1,5 +1,6 @@
 import { $ } from "../../utils/util.js";
 import { Todo } from "../Todo/Todo.js";
+import { fetchAddTodo } from "../../utils/fetchTodo.js";
 
 class List {
   constructor(parentElement, listIdx, list, userId) {
@@ -38,7 +39,7 @@ class List {
     }
   }
 
-  addTodo() {
+  async addTodo() {
     if (!this.todoAddTextArea.value.trim()) return;
     const todoObj = {
       id: null,
@@ -47,11 +48,21 @@ class List {
       addedBy: this.userId
     };
     this.todoArray.push(
-      new Todo($("#todo-container-" + this.listIdx), todoObj)
+      new Todo($("#todo-container-" + this.listIdx), todoObj) // 클라이언트에 todo 추가
     );
     this.listCounter.innerText++;
     this.todoAddTextArea.value = "";
     this.listAddContainer.style.opacity = 0.7;
+    const result = await fetchAddTodo(
+      todoObj.order,
+      todoObj.content,
+      todoObj.addedBy,
+      this.list.id
+    ); // DB에 todo 추가
+    if (result.message !== "success") {
+      // 에러
+      console.log(result.message);
+    }
   }
 
   setTodoContainerSize() {

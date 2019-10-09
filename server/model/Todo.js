@@ -47,6 +47,21 @@ class Todo {
       res.json({ message: "db not connected" });
     }
   }
+
+  async addTodo(order, content, addedBy, todoBelongList, res) {
+    try {
+      const connection = await pool.getConnection(async conn => conn);
+      const [rows] = await connection.query(
+        `insert into TODO(TODO_ORDER, TODO_BELONG_LIST, TODO_CONTENT, TODO_ADDED_BY) values (?, ?, ?, ?)`,
+        [+order, +todoBelongList, content, addedBy]
+      );
+      connection.release();
+      if (rows.affectedRows) return res.json({ message: "success" });
+      else res.json({ message: "failure" });
+    } catch (err) {
+      res.json({ message: "db not connected" });
+    }
+  }
 }
 
 module.exports = Todo;

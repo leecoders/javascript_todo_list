@@ -51,9 +51,23 @@ const fetchTodosByListId = listId => {
     .catch(error => "error");
 };
 
+const fetchAddTodo = (order, content, addedBy, todoBelongList) => {
+  return fetch(serverUrl + "todo/add-todo", {
+    method: "POST",
+    body: JSON.stringify({ order, content, addedBy, todoBelongList }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => response)
+    .catch(error => "error");
+};
+
 export {
   fetchUserInfo,
   fetchBoardsByUserId,
   fetchListsByBoardId,
-  fetchTodosByListId
+  fetchTodosByListId,
+  fetchAddTodo
 };
