@@ -1,17 +1,28 @@
 import { $ } from "../../utils/util.js";
 
 class Todo {
-  constructor(parentElement, todo) {
+  constructor(parentElement, todo, { handleDeleteTodoClicked }) {
     this.parentElement = parentElement;
     this.todo = todo;
+    this.handleDeleteTodoClicked = handleDeleteTodoClicked;
     this.render();
+    this.init();
+  }
+
+  init() {
+    this.deleteTodoButton = $(`#todo-delete-button-${this.todo.id}`);
+    this.setDeleteButtonEvent();
   }
 
   getElement() {
     return $(`#todo-wrapper-${this.todo.order}`);
   }
 
-  // this.todoIdx가 아닌 DB에 저장된 실제 todo 카드의 아이디를 DOM 아이디로 사용하도록 변경할 필요가 있음
+  setDeleteButtonEvent() {
+    this.deleteTodoButton.addEventListener("click", e => {
+      this.handleDeleteTodoClicked(e.target.id.split("button-")[1], e.target);
+    });
+  }
   render() {
     this.parentElement.insertAdjacentHTML(
       "beforeend",

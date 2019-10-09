@@ -9,6 +9,11 @@ router.use("/add-todo", async (req, res) => {
   Todo.addTodo(order, content, addedBy, todoBelongList, res);
 });
 
+router.use("/delete-todo", async (req, res) => {
+  const { todoId } = req.body;
+  Todo.deleteTodo(todoId, res);
+});
+
 router.use("/get-boards", async (req, res) => {
   const { userId } = req.body;
   Todo.getBoardsByUserId(userId, res);

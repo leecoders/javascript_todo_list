@@ -64,10 +64,24 @@ const fetchAddTodo = (order, content, addedBy, todoBelongList) => {
     .catch(error => "error");
 };
 
+const fetchDeleteTodo = todoId => {
+  return fetch(serverUrl + "todo/delete-todo", {
+    method: "POST",
+    body: JSON.stringify({ todoId }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => response)
+    .catch(error => "error");
+};
+
 export {
   fetchUserInfo,
   fetchBoardsByUserId,
   fetchListsByBoardId,
   fetchTodosByListId,
-  fetchAddTodo
+  fetchAddTodo,
+  fetchDeleteTodo
 };

@@ -1,6 +1,6 @@
-import { $ } from "../../utils/util.js";
+import { $, findAncestorsElement } from "../../utils/util.js";
 import { Todo } from "../Todo/Todo.js";
-import { fetchAddTodo } from "../../utils/fetchTodo.js";
+import { fetchAddTodo, fetchDeleteTodo } from "../../utils/fetchTodo.js";
 
 class List {
   constructor(parentElement, listIdx, list, userId) {
@@ -34,7 +34,9 @@ class List {
     this.todoArray = [];
     for (let i = 0; i < this.list.todos.length; ++i) {
       this.todoArray.push(
-        new Todo($("#todo-container-" + this.listIdx), this.list.todos[i])
+        new Todo($("#todo-container-" + this.listIdx), this.list.todos[i], {
+          handleDeleteTodoClicked: this.handleDeleteTodoClicked
+        })
       );
     }
   }
@@ -48,7 +50,9 @@ class List {
       addedBy: this.userId
     };
     this.todoArray.push(
-      new Todo($("#todo-container-" + this.listIdx), todoObj) // 클라이언트에 todo 추가
+      new Todo($("#todo-container-" + this.listIdx), todoObj, {
+        handleDeleteTodoClicked: this.handleDeleteTodoClicked
+      }) // 클라이언트에 todo 추가
     );
     this.listCounter.innerText++;
     this.todoAddTextArea.value = "";
@@ -62,6 +66,11 @@ class List {
     if (result.message !== "success") {
       // 에러
       console.log(result.message);
+      return;
+    }
+
+    while (this.todoContainer.hasChildNodes()) {
+      this.todoContainer.removeChild(this.todoContainer.firstChild);
     }
   }
 
@@ -106,6 +115,17 @@ class List {
         this.listAddContainer.style.opacity = 0.7;
       }
     });
+  }
+
+  async handleDeleteTodoClicked(todoId, todoButton) {
+    console.log(todoId);
+    const result = await fetchDeleteTodo(+todoId);
+    if (result.message !== "success") {
+      console.log(result.message);
+      return;
+    }
+    const todo = findAncestorsElement(todoButton, "todo-wrapper");
+    todo.remove();
   }
 
   render() {

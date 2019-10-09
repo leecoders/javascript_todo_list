@@ -63,6 +63,21 @@ class Todo {
     }
   }
 
+  async deleteTodo(todoId, res) {
+    try {
+      const connection = await pool.getConnection(async conn => conn);
+      const [rows] = await connection.query(
+        `delete from TODO where TODO_ID=?`,
+        [todoId]
+      );
+      connection.release();
+      if (rows.affectedRows) return res.json({ message: "success" });
+      else res.json({ message: "failure" });
+    } catch (err) {
+      res.json({ message: "db not connected" });
+    }
+  }
+
   // async addDefaultList(userId, res) {
   //   try {
   //   const connection = await pool.getConnection(async conn => conn);

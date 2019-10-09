@@ -88,3 +88,11 @@ insert into TODO(TODO_ORDER, TODO_BELONG_LIST, TODO_CONTENT, TODO_ADDED_BY) valu
 
 - 어떤 컬럼에 값을 삽입할지만 명시하면 그에 맞는 값들만 values에 전달하면 된다.
 - 주의) 물론 PK는 필수적으로 컬럼, 값을 삽입해야 한다.
+
+### 모든 자식 요소 삭제하기
+
+```javascript
+while (this.todoContainer.hasChildNodes()) {
+  this.todoContainer.removeChild(this.todoContainer.firstChild);
+}
+```
