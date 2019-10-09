@@ -87,12 +87,13 @@ class Section {
     // 현재는 유저 당 보드 1개 -> 업데이트 예정
     this.listArray = [];
     for (let i = 0; i < board.lists.length; ++i) {
-      this.listArray.push(new List($(".list-container"), i, board.lists[i]));
+      this.listArray.push(
+        new List($(".list-container"), i, board.lists[i], this.userId)
+      );
     }
   }
 
   changeListCounterAfterMove() {
-    console.log(this.listStart, this.listEnd);
     $(`#todo-counter-${this.listStart}`).innerText--;
     $(`#todo-counter-${this.listEnd}`).innerText++;
   }
