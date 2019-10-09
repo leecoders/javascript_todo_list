@@ -91,6 +91,12 @@ class Section {
     }
   }
 
+  changeListCounterAfterMove() {
+    console.log(this.listStart, this.listEnd);
+    $(`#todo-counter-${this.listStart}`).innerText--;
+    $(`#todo-counter-${this.listEnd}`).innerText++;
+  }
+
   setTodoMouseEnterEvent() {
     Array.prototype.forEach.call(
       document.querySelectorAll(".todo-wrapper"),
@@ -130,6 +136,7 @@ class Section {
 
   setTodoDragEvent() {
     $("body").addEventListener("mousedown", e => {
+      // 변경 시작 시점
       const target = e.target;
       const todo = findAncestorsElement(target, "todo-wrapper");
       if (todo.className !== "todo-wrapper") return;
@@ -138,12 +145,15 @@ class Section {
       this.dragStartX = e.clientX; // 마우스 시작 좌표
       this.dragStartY = e.clientY;
       this.dragTodoX = todoX;
-      this.dragTodoY = todoY - 7.5;
+      this.dragTodoY = todoY - 7.5; // margin-top 보정(left는 auto라서 안잡힘)
       this.dragTarget = todo.cloneNode(true);
       this.dragTarget.style.left = this.dragTodoX + "px";
-      this.dragTarget.style.top = this.dragTodoY + "px"; // margin-top 보정
+      this.dragTarget.style.top = this.dragTodoY + "px";
       this.dragTarget.classList.add("dragging");
       this.todo = todo;
+      this.listStart = findAncestorsElement(target, "todo-container").id.split(
+        "container-"
+      )[1];
       todo.style.opacity = "0.5";
       $("body").appendChild(this.dragTarget);
     });
@@ -157,10 +167,15 @@ class Section {
       e.preventDefault();
     });
     $("body").addEventListener("mouseup", e => {
+      // 변경 완료 시점
       if (!this.dragTarget) return;
       this.todo.style.opacity = "1";
       this.dragTarget.remove();
       this.dragTarget = undefined;
+      this.listEnd = findAncestorsElement(this.todo, "todo-container").id.split(
+        "container-"
+      )[1];
+      this.changeListCounterAfterMove();
     });
   }
 

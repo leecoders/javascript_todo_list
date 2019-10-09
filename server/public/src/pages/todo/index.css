@@ -47,7 +47,7 @@ body {
 
 .todo-wrapper.dragging {
   position: fixed;
-  border: 1px solid #f45252;
+  border: 3px solid rgba(255, 0, 0, 0.3);
   opacity: 0.9;
   pointer-events: none;
 }
