@@ -34,9 +34,14 @@ class List {
     this.todoArray = [];
     for (let i = 0; i < this.list.todos.length; ++i) {
       this.todoArray.push(
-        new Todo($("#todo-container-" + this.listIdx), this.list.todos[i], {
-          handleDeleteTodoClicked: this.handleDeleteTodoClicked
-        })
+        new Todo(
+          $("#todo-container-" + this.listIdx),
+          this.list.todos[i],
+          this.listCounter,
+          {
+            handleDeleteTodoClicked: this.handleDeleteTodoClicked
+          }
+        )
       );
     }
   }
@@ -62,9 +67,14 @@ class List {
     }
     todoObj.id = result.data;
     this.todoArray.push(
-      new Todo($("#todo-container-" + this.listIdx), todoObj, {
-        handleDeleteTodoClicked: this.handleDeleteTodoClicked
-      }) // 클라이언트에 todo 추가
+      new Todo(
+        $("#todo-container-" + this.listIdx),
+        todoObj,
+        this.listCounter,
+        {
+          handleDeleteTodoClicked: this.handleDeleteTodoClicked
+        }
+      ) // 클라이언트에 todo 추가
     );
     this.listCounter.innerText++;
     this.todoAddTextArea.value = "";
@@ -114,8 +124,7 @@ class List {
     });
   }
 
-  async handleDeleteTodoClicked(todoId, todoButton) {
-    console.log(todoId);
+  async handleDeleteTodoClicked(todoId, todoButton, listCounter) {
     const result = await fetchDeleteTodo(+todoId);
     if (result.message !== "success") {
       console.log(result.message);
@@ -123,6 +132,7 @@ class List {
     }
     const todo = findAncestorsElement(todoButton, "todo-wrapper");
     todo.remove();
+    listCounter.innerText--; // 클로저 때문에 this.listCounter is null -> 여기서 --해줄 수가 없음..
   }
 
   render() {

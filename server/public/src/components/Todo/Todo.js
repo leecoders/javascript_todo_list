@@ -1,9 +1,10 @@
 import { $ } from "../../utils/util.js";
 
 class Todo {
-  constructor(parentElement, todo, { handleDeleteTodoClicked }) {
+  constructor(parentElement, todo, listCounter, { handleDeleteTodoClicked }) {
     this.parentElement = parentElement;
     this.todo = todo;
+    this.listCounter = listCounter; // 이게 왜 여기..? 클로저 때문에 임시 방편
     this.handleDeleteTodoClicked = handleDeleteTodoClicked;
     this.render();
     this.init();
@@ -20,7 +21,11 @@ class Todo {
 
   setDeleteButtonEvent() {
     this.deleteTodoButton.addEventListener("click", e => {
-      this.handleDeleteTodoClicked(e.target.id.split("button-")[1], e.target);
+      this.handleDeleteTodoClicked(
+        e.target.id.split("button-")[1],
+        e.target,
+        this.listCounter
+      );
     });
   }
   render() {
