@@ -56,9 +56,9 @@ class Todo {
         [+order, +todoBelongList, content, addedBy]
       );
       const [rows2] = await connection.query(
-        `select TODO_ID from TODO order by TODO_ID`,
-        [+order, +todoBelongList, content, addedBy]
+        `select TODO_ID from TODO order by TODO_ID`
       );
+      console.log(rows2);
       connection.release();
       if (rows.affectedRows || rows2.length)
         return res.json({
