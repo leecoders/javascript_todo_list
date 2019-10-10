@@ -87,18 +87,6 @@ class Section {
     });
   }
 
-  async setLists(board) {
-    // 현재는 유저 당 보드 1개 -> 업데이트 예정
-    if (!this.boardsData) return;
-    board = this.boardsData[0];
-    this.listArray = [];
-    for (let i = 0; i < board.lists.length; ++i) {
-      this.listArray.push(
-        new List($(".list-container"), i, board.lists[i], this.userId)
-      );
-    }
-  }
-
   async updateTodoBelongList() {
     const result = await fetchTodoBelongList(
       +this.todo.id.split("wrapper-")[1],
@@ -122,6 +110,14 @@ class Section {
       todos: []
     };
     this.boardsData[0].lists.push(listObj); // 보드 추가 시 수정 대상
+    this.listArray.push(
+      new List(
+        $(".list-container"),
+        this.listArray.length,
+        listObj,
+        this.userId
+      )
+    );
   }
 
   async sortListTodos() {
@@ -134,6 +130,18 @@ class Section {
     if (result.message !== "success") {
       console.log(result.message);
       return;
+    }
+  }
+
+  setLists(board) {
+    // 현재는 유저 당 보드 1개 -> 업데이트 예정
+    if (!this.boardsData) return;
+    board = this.boardsData[0];
+    this.listArray = [];
+    for (let i = 0; i < board.lists.length; ++i) {
+      this.listArray.push(
+        new List($(".list-container"), i, board.lists[i], this.userId)
+      );
     }
   }
 
