@@ -2,22 +2,26 @@
 
 ## 배포
 
-### [로그인](http://106.10.34.142:3000/signin)
+### [로그인 페이지](http://106.10.34.142:3000/signin)
 
 - 계정
   - ID : admin / PW : admin
+  - ID : normal / PW : normal
 
-### [관리자](http://106.10.34.142:3000/admin)
+### [투두 페이지] : http://106.10.34.142:3000/todo/ + `유저 아이디`
+
+- 쿠키 권한 없으면 접근 불가
+- admin은 모든 사용자 페이지 접근 가능
+- 회원가입 기능 없음 -> board 가진 사용자는 admin, normal 밖에 없음
+  - board 없으면 기능 사용 불가
+
+### [관리자 페이지](http://106.10.34.142:3000/admin)
 
 ## DB
 
-### DB tables description
-
-![DB_tables](https://user-images.githubusercontent.com/47619140/65963651-306a2200-e496-11e9-9d7e-a834c1f61d13.jpeg)
-
 ### DB EER
 
-![DB_EER](https://user-images.githubusercontent.com/47619140/65963472-c3568c80-e495-11e9-99f2-8eee70e03572.png)
+![DB_EER]("https://user-images.githubusercontent.com/47619140/66574773-c0ebe500-ebaf-11e9-9652-01c3c748885e.png)
 
 ## 보드 ,리스트, 카드 데이터 객체화 시나리오
 
