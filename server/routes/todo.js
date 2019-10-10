@@ -19,6 +19,11 @@ router.use("/sort-list-order", async (req, res) => {
   Todo.sortListOrder(listStartTodoIdArray, listEndTodoIdArray, res);
 });
 
+router.use("/update-todo-belong-list", async (req, res) => {
+  const { todoId, listEndId } = req.body;
+  Todo.updateTodoBelongList(todoId, listEndId, res);
+});
+
 router.use("/get-boards", async (req, res) => {
   const { userId } = req.body;
   Todo.getBoardsByUserId(userId, res);

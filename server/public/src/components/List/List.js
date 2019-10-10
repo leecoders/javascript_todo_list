@@ -127,17 +127,6 @@ class List {
     });
   }
 
-  // async handleDeleteTodoClicked(todoId, todoButton, listCounter) {
-  //   const result = await fetchDeleteTodo(+todoId);
-  //   if (result.message !== "success") {
-  //     console.log(result.message);
-  //     return;
-  //   }
-  //   const todo = findAncestorsElement(todoButton, "todo-wrapper");
-  //   todo.remove();
-  //   listCounter.innerText--; // 클로저 때문에 this.listCounter is null -> 여기서 --해줄 수가 없음..
-  // }
-
   render() {
     this.parentElement.insertAdjacentHTML(
       "beforeend",

@@ -93,6 +93,22 @@ const fetchSortListOrder = (listStartTodoIdArray, listEndTodoIdArray) => {
     .catch(error => "error");
 };
 
+const fetchTodoBelongList = (todoId, listEndId) => {
+  return fetch(serverUrl + "todo/update-todo-belong-list", {
+    method: "POST",
+    body: JSON.stringify({
+      todoId,
+      listEndId
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => response)
+    .catch(error => "error");
+};
+
 export {
   fetchUserInfo,
   fetchBoardsByUserId,
@@ -100,5 +116,6 @@ export {
   fetchTodosByListId,
   fetchAddTodo,
   fetchDeleteTodo,
-  fetchSortListOrder
+  fetchSortListOrder,
+  fetchTodoBelongList
 };

@@ -3,7 +3,8 @@ import {
   fetchBoardsByUserId,
   fetchListsByBoardId,
   fetchTodosByListId,
-  fetchSortListOrder
+  fetchSortListOrder,
+  fetchTodoBelongList
 } from "../../utils/fetchTodo.js";
 import { Modal } from "../Modal/Modal.js";
 import { List } from "../List/List.js";
@@ -93,6 +94,17 @@ class Section {
       this.listArray.push(
         new List($(".list-container"), i, board.lists[i], this.userId)
       );
+    }
+  }
+
+  async updateTodoBelongList() {
+    const result = await fetchTodoBelongList(
+      +this.todo.id.split("wrapper-")[1],
+      this.boardsData[0].lists[this.listEnd].id // 보드 추가 시 수정 대상
+    );
+    if (result.message !== "success") {
+      console.log(result.message);
+      return;
     }
   }
 
@@ -192,7 +204,7 @@ class Section {
       e.stopPropagation();
       e.preventDefault();
     });
-    $("body").addEventListener("mouseup", e => {
+    $("body").addEventListener("mouseup", async e => {
       // 변경 완료 시점
       if (!this.dragTarget) return;
       this.todo.style.opacity = "1";
@@ -201,6 +213,7 @@ class Section {
       this.listEnd = findAncestorsElement(this.todo, "todo-container").id.split(
         "container-"
       )[1];
+      await this.updateTodoBelongList();
       this.changeListCounterAfterMove();
       this.sortListTodos();
     });
