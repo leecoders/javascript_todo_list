@@ -22,7 +22,7 @@ class Todo {
     try {
       const connection = await pool.getConnection(async conn => conn);
       const [rows] = await connection.query(
-        `select LIST_ID, LIST_NAME from LIST where LIST_BELONG_BOARD=?`,
+        `select LIST_ID, LIST_NAME from LIST where LIST_BELONG_BOARD=? order by LIST_ID`,
         [boardId]
       );
       connection.release();
@@ -147,6 +147,42 @@ class Todo {
             id: rows2[rows2.length - 1].LIST_ID,
             name: rows2[rows2.length - 1].LIST_NAME
           }
+        });
+      else res.json({ message: "error" });
+    } catch (err) {
+      res.json({ message: "db not connected" });
+    }
+  }
+
+  async updateListName(listId, title, res) {
+    try {
+      const connection = await pool.getConnection(async conn => conn);
+      const [rows] = await connection.query(
+        `update LIST set LIST_NAME=? where LIST_ID=?`,
+        [title, listId]
+      );
+      connection.release();
+      if (rows.affectedRows)
+        res.json({
+          message: "success"
+        });
+      else res.json({ message: "error" });
+    } catch (err) {
+      res.json({ message: "db not connected" });
+    }
+  }
+
+  async updateBoardName(boardId, title, res) {
+    try {
+      const connection = await pool.getConnection(async conn => conn);
+      const [rows] = await connection.query(
+        `update BOARD set BOARD_NAME=? where BOARD_ID=?`,
+        [title, boardId]
+      );
+      connection.release();
+      if (rows.affectedRows)
+        res.json({
+          message: "success"
         });
       else res.json({ message: "error" });
     } catch (err) {

@@ -1,5 +1,6 @@
 import { $, findAncestorsElement } from "../../utils/util.js";
 import { Todo } from "../Todo/Todo.js";
+import { ModalInput } from "../ModalInput/ModalInput.js";
 import { fetchAddTodo, fetchDeleteTodo } from "../../utils/fetchTodo.js";
 
 class List {
@@ -13,6 +14,7 @@ class List {
   }
 
   init() {
+    this.listTitle = $(`#list-title-${this.listIdx}`);
     this.listWrapper = $(`#list-wrapper-${this.listIdx}`);
     this.listHead = $(`#list-head-${this.listIdx}`);
     this.todoContainer = $(`#todo-container-${this.listIdx}`);
@@ -22,6 +24,7 @@ class List {
     this.addButton = $(`#list-add-add-button-${this.listIdx}`);
     this.cancelAddButton = $(`#list-add-cancel-button-${this.listIdx}`);
     this.listCounter = $(`#todo-counter-${this.listIdx}`);
+    this.setListTitleClickEvent();
     this.setTodoContainerSize();
     this.setPlusTodoButtonEvent();
     this.setAddButtonEvent();
@@ -66,6 +69,19 @@ class List {
     this.listCounter.innerText++;
     this.todoAddTextArea.value = "";
     this.listAddContainer.style.opacity = 0.7;
+  }
+
+  setListTitleClickEvent() {
+    this.listTitle.addEventListener("click", () => {
+      $(".outside").style.visibility = "visible";
+      $("body").style.overflowX = "hidden";
+      this.modalInput = new ModalInput(
+        $(".outside"),
+        this.list,
+        "Column name",
+        this.listTitle
+      );
+    });
   }
 
   setTodoContainerSize() {
@@ -137,15 +153,33 @@ class List {
             <span id="todo-counter-${this.listIdx}" class="todo-counter">
               ${this.list.todos.length}
             </span>
-            <span class="list-title">${this.list.name}</span>
-            <span id="list-plus-button-${this.listIdx}" class="list-plus-button"></span>
-            <span id="list-delete-button-${this.listIdx}" class="list-delete-button"></span>
+            <span id="list-title-${this.listIdx}" class="list-title">
+              ${
+                this.list.name.length > 16
+                  ? this.list.name.substring(0, 16) + "..."
+                  : this.list.name
+              }
+            </span>
+            <span id="list-plus-button-${
+              this.listIdx
+            }" class="list-plus-button"></span>
+            <span id="list-delete-button-${
+              this.listIdx
+            }" class="list-delete-button"></span>
           </div>
-          <div id="list-add-container-${this.listIdx}" class="list-add-container">
-            <textarea id="list-add-textarea-${this.listIdx}" class="list-add-textarea" placeholder="Enter a note"></textarea>
+          <div id="list-add-container-${
+            this.listIdx
+          }" class="list-add-container">
+            <textarea id="list-add-textarea-${
+              this.listIdx
+            }" class="list-add-textarea" placeholder="Enter a note"></textarea>
             <div class="list-add-button-container">
-              <span id="list-add-add-button-${this.listIdx}" class="list-add-add-button">Add</span>
-              <span id="list-add-cancel-button-${this.listIdx}" class="list-add-cancel-button">Cancel</span>
+              <span id="list-add-add-button-${
+                this.listIdx
+              }" class="list-add-add-button">Add</span>
+              <span id="list-add-cancel-button-${
+                this.listIdx
+              }" class="list-add-cancel-button">Cancel</span>
             </div>
           </div>
         </div>

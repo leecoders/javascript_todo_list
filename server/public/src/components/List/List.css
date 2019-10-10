@@ -51,6 +51,15 @@
 
 .list-title {
   display: inline-block;
+  cursor: pointer;
+}
+.list-title:hover {
+  border-bottom: 1px solid #797c7e;
+  opacity: 0.8;
+}
+.list-title:active {
+  border-bottom: 1px solid #797c7e;
+  opacity: 0.7;
 }
 
 .list-plus-button {

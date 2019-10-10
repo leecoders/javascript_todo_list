@@ -122,6 +122,32 @@ const fetchAddColumn = boardId => {
     .catch(error => "error");
 };
 
+const fetchUpdateListName = (listId, title) => {
+  return fetch(serverUrl + "todo/update-list-name", {
+    method: "POST",
+    body: JSON.stringify({ listId, title }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => response)
+    .catch(error => "error");
+};
+
+const fetchUpdateBoardName = (boardId, title) => {
+  return fetch(serverUrl + "todo/update-board-name", {
+    method: "POST",
+    body: JSON.stringify({ boardId, title }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => response)
+    .catch(error => "error");
+};
+
 export {
   fetchUserInfo,
   fetchBoardsByUserId,
@@ -131,5 +157,7 @@ export {
   fetchDeleteTodo,
   fetchSortListOrder,
   fetchTodoBelongList,
-  fetchAddColumn
+  fetchAddColumn,
+  fetchUpdateListName,
+  fetchUpdateBoardName
 };

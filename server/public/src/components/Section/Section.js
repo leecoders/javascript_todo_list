@@ -7,7 +7,7 @@ import {
   fetchTodoBelongList,
   fetchAddColumn
 } from "../../utils/fetchTodo.js";
-import { Modal } from "../Modal/Modal.js";
+import { ModalInput } from "../ModalInput/ModalInput.js";
 import { List } from "../List/List.js";
 
 class Section {
@@ -27,6 +27,7 @@ class Section {
     this.setListMouseEnterEvent();
     this.setTodoMouseEnterEvent();
     this.setListAddButtonClickEvent();
+    this.setBoardTitleClickEvent();
   }
 
   async setBoardsData() {
@@ -250,11 +251,31 @@ class Section {
     });
   }
 
+  setBoardTitleClickEvent() {
+    $(".board-title").innerText =
+      this.boardsData[0].name.length > 24
+        ? this.boardsData[0].name.substring(0, 24) + "..."
+        : this.boardsData[0].name;
+    $(".board-title").addEventListener("click", () => {
+      $(".outside").style.visibility = "visible";
+      $("body").style.overflowX = "hidden";
+      this.modalInput = new ModalInput(
+        $(".outside"),
+        this.boardsData[0],
+        "Board name",
+        $(".board-title"),
+        "board"
+      );
+    });
+  }
+
   render() {
     this.parentElement.innerHTML = /*html*/ `
       <div class="section-container">
         <div class="section-title-container">
-          투두 타이틀
+          <span class="board-title">
+            투두 타이틀
+          </span>
         </div>
         <div class="list-container">
         </div>

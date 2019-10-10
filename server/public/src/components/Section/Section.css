@@ -3,14 +3,13 @@ section {
   display: flex;
   width: auto;
   height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
 }
 
 .section-title-container {
+  z-index: 3;
   position: fixed;
   top: 3.3rem;
-  margin: 0.5rem 0 0 1.5rem;
+  margin: 1rem 0 0 1.5rem;
   width: 100%;
   height: 2.2rem;
   color: #ffffff;
@@ -32,8 +31,6 @@ section {
   top: 3rem;
   width: auto;
   height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
   margin: 0 0.7rem;
   user-select: none;
 }
@@ -65,4 +62,11 @@ section {
   background: url("../../images/plus.png") no-repeat 50% 50%;
   background-size: 1.2rem 1.2rem;
   margin-right: 0.2rem;
+}
+
+.board-title {
+  cursor: pointer;
+}
+.board-title:hover {
+  border-bottom: 1px solid #ced4da;
 }
