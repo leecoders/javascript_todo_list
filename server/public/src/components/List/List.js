@@ -28,20 +28,14 @@ class List {
     this.setCancelAddButtonEvent();
     this.setChangeTextareaEvent();
     this.setTodos();
+    this.setDeleteTodoClickEvent();
   }
 
   setTodos() {
     this.todoArray = [];
     for (let i = 0; i < this.list.todos.length; ++i) {
       this.todoArray.push(
-        new Todo(
-          $("#todo-container-" + this.listIdx),
-          this.list.todos[i],
-          this.listCounter,
-          {
-            handleDeleteTodoClicked: this.handleDeleteTodoClicked
-          }
-        )
+        new Todo($("#todo-container-" + this.listIdx), this.list.todos[i])
       );
     }
   }
@@ -67,14 +61,7 @@ class List {
     }
     todoObj.id = result.data;
     this.todoArray.push(
-      new Todo(
-        $("#todo-container-" + this.listIdx),
-        todoObj,
-        this.listCounter,
-        {
-          handleDeleteTodoClicked: this.handleDeleteTodoClicked
-        }
-      ) // 클라이언트에 todo 추가
+      new Todo($("#todo-container-" + this.listIdx), todoObj) // 클라이언트에 todo 추가
     );
     this.listCounter.innerText++;
     this.todoAddTextArea.value = "";
@@ -124,16 +111,32 @@ class List {
     });
   }
 
-  async handleDeleteTodoClicked(todoId, todoButton, listCounter) {
-    const result = await fetchDeleteTodo(+todoId);
-    if (result.message !== "success") {
-      console.log(result.message);
-      return;
-    }
-    const todo = findAncestorsElement(todoButton, "todo-wrapper");
-    todo.remove();
-    listCounter.innerText--; // 클로저 때문에 this.listCounter is null -> 여기서 --해줄 수가 없음..
+  setDeleteTodoClickEvent() {
+    this.todoContainer.addEventListener("click", async e => {
+      if (e.target.className !== "todo-delete-button") return;
+      const target = e.target;
+      const todo = findAncestorsElement(target, "todo-wrapper");
+      const todoId = todo.id.split("wrapper-")[1];
+      const result = await fetchDeleteTodo(+todoId);
+      if (result.message !== "success") {
+        console.log(result.message);
+        return;
+      }
+      todo.remove();
+      this.listCounter.innerText--;
+    });
   }
+
+  // async handleDeleteTodoClicked(todoId, todoButton, listCounter) {
+  //   const result = await fetchDeleteTodo(+todoId);
+  //   if (result.message !== "success") {
+  //     console.log(result.message);
+  //     return;
+  //   }
+  //   const todo = findAncestorsElement(todoButton, "todo-wrapper");
+  //   todo.remove();
+  //   listCounter.innerText--; // 클로저 때문에 this.listCounter is null -> 여기서 --해줄 수가 없음..
+  // }
 
   render() {
     this.parentElement.insertAdjacentHTML(

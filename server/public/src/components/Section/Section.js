@@ -2,7 +2,8 @@ import { $, findAncestorsElement } from "../../utils/util.js";
 import {
   fetchBoardsByUserId,
   fetchListsByBoardId,
-  fetchTodosByListId
+  fetchTodosByListId,
+  fetchSortListOrder
 } from "../../utils/fetchTodo.js";
 import { Modal } from "../Modal/Modal.js";
 import { List } from "../List/List.js";
@@ -95,6 +96,17 @@ class Section {
     }
   }
 
+  async sortListTodos() {
+    const listArray = this.boardsData[0].lists; // 현재는 보드 1개 뿐!! 나중에 변경 대상
+    const listStartId = listArray[this.listStart].id;
+    const listEndId = listArray[this.listEnd].id;
+    const result = await fetchSortListOrder(listStartId, listEndId);
+    if (result.message !== "success") {
+      console.log(result.message);
+      return;
+    }
+  }
+
   changeListCounterAfterMove() {
     $(`#todo-counter-${this.listStart}`).innerText--;
     $(`#todo-counter-${this.listEnd}`).innerText++;
@@ -181,6 +193,7 @@ class Section {
         "container-"
       )[1];
       this.changeListCounterAfterMove();
+      this.sortListTodos();
     });
   }
 

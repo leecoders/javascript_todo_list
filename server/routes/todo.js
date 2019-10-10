@@ -14,6 +14,11 @@ router.use("/delete-todo", async (req, res) => {
   Todo.deleteTodo(todoId, res);
 });
 
+router.use("/sort-list-order", async (req, res) => {
+  const { listStart, listEnd } = req.body;
+  Todo.addTodo(listStart, listEnd, res);
+});
+
 router.use("/get-boards", async (req, res) => {
   const { userId } = req.body;
   Todo.getBoardsByUserId(userId, res);

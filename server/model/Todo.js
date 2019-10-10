@@ -37,7 +37,7 @@ class Todo {
     try {
       const connection = await pool.getConnection(async conn => conn);
       const [rows] = await connection.query(
-        `select TODO_ID, TODO_ORDER, TODO_CONTENT, TODO_ADDED_BY from TODO where TODO_BELONG_LIST=?`,
+        `select TODO_ID, TODO_ORDER, TODO_CONTENT, TODO_ADDED_BY from TODO where TODO_BELONG_LIST=? order by TODO_ORDER`,
         [listId]
       );
       connection.release();
@@ -58,7 +58,6 @@ class Todo {
       const [rows2] = await connection.query(
         `select TODO_ID from TODO order by TODO_ID`
       );
-      console.log(rows2);
       connection.release();
       if (rows.affectedRows || rows2.length)
         return res.json({

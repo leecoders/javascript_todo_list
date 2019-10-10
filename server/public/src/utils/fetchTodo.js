@@ -77,11 +77,25 @@ const fetchDeleteTodo = todoId => {
     .catch(error => "error");
 };
 
+const fetchSortListOrder = (listStart, listEnd) => {
+  return fetch(serverUrl + "todo/sort-list-order", {
+    method: "POST",
+    body: JSON.stringify({ listStart, listEnd }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => response)
+    .catch(error => "error");
+};
+
 export {
   fetchUserInfo,
   fetchBoardsByUserId,
   fetchListsByBoardId,
   fetchTodosByListId,
   fetchAddTodo,
-  fetchDeleteTodo
+  fetchDeleteTodo,
+  fetchSortListOrder
 };
