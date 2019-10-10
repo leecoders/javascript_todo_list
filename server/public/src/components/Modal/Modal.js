@@ -1,7 +1,7 @@
 import { $ } from "../../utils/util.js";
 
 class Modal {
-  constructor(parentElement, message) {
+  constructor(parentElement, message, listId) {
     this.parentElement = parentElement;
     this.message = message;
     this.render();
