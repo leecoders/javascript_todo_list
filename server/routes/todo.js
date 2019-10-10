@@ -24,6 +24,11 @@ router.use("/update-todo-belong-list", async (req, res) => {
   Todo.updateTodoBelongList(todoId, listEndId, res);
 });
 
+router.use("/add-column", async (req, res) => {
+  const { boardId } = req.body;
+  Todo.addcolumn(boardId, res);
+});
+
 router.use("/get-boards", async (req, res) => {
   const { userId } = req.body;
   Todo.getBoardsByUserId(userId, res);

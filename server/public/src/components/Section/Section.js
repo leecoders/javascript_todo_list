@@ -4,7 +4,8 @@ import {
   fetchListsByBoardId,
   fetchTodosByListId,
   fetchSortListOrder,
-  fetchTodoBelongList
+  fetchTodoBelongList,
+  fetchAddColumn
 } from "../../utils/fetchTodo.js";
 import { Modal } from "../Modal/Modal.js";
 import { List } from "../List/List.js";
@@ -25,6 +26,7 @@ class Section {
     this.setTodoDragEvent();
     this.setListMouseEnterEvent();
     this.setTodoMouseEnterEvent();
+    this.setListAddButtonClickEvent();
   }
 
   async setBoardsData() {
@@ -108,6 +110,20 @@ class Section {
     }
   }
 
+  async addColumn() {
+    const result = await fetchAddColumn(this.boardsData[0].id); // 보드 추가 시 수정 대상
+    if (result.message !== "success") {
+      console.log(result.message);
+      return;
+    }
+    const listObj = {
+      id: result.data.id,
+      name: result.data.name,
+      todos: []
+    };
+    this.boardsData[0].lists.push(listObj); // 보드 추가 시 수정 대상
+  }
+
   async sortListTodos() {
     const listStartTodoIdArray = this.getTodoIdArray(this.listStart);
     const listEndTodoIdArray = this.getTodoIdArray(this.listEnd);
@@ -175,6 +191,7 @@ class Section {
     $("body").addEventListener("mousedown", e => {
       // 변경 시작 시점
       if (this.dragTarget) return;
+      if (e.target.className === "todo-delete-button") return;
       const target = e.target;
       const todo = findAncestorsElement(target, "todo-wrapper");
       if (todo.className !== "todo-wrapper") return;
@@ -219,14 +236,23 @@ class Section {
     });
   }
 
+  setListAddButtonClickEvent() {
+    $(".section-list-add-container").addEventListener("click", () => {
+      this.addColumn();
+    });
+  }
+
   render() {
     this.parentElement.innerHTML = /*html*/ `
       <div class="section-container">
         <div class="section-title-container">
           투두 타이틀
         </div>
-        <div class="list-container"></div>
+        <div class="list-container">
+        </div>
       </div>
+      <div class="section-list-add-container">
+        <span class="plus-icon"></span><span>Add column</span></div>
     `;
   }
 }

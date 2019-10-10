@@ -109,6 +109,19 @@ const fetchTodoBelongList = (todoId, listEndId) => {
     .catch(error => "error");
 };
 
+const fetchAddColumn = boardId => {
+  return fetch(serverUrl + "todo/add-column", {
+    method: "POST",
+    body: JSON.stringify({ boardId }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => response)
+    .catch(error => "error");
+};
+
 export {
   fetchUserInfo,
   fetchBoardsByUserId,
@@ -117,5 +130,6 @@ export {
   fetchAddTodo,
   fetchDeleteTodo,
   fetchSortListOrder,
-  fetchTodoBelongList
+  fetchTodoBelongList,
+  fetchAddColumn
 };

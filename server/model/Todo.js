@@ -41,8 +41,7 @@ class Todo {
         [listId]
       );
       connection.release();
-      if (rows.length) return res.json({ message: "success", data: rows });
-      else res.json({ message: "failure" });
+      return res.json({ message: "success", data: rows });
     } catch (err) {
       res.json({ message: "db not connected" });
     }
@@ -114,6 +113,7 @@ class Todo {
       res.json({ message: "db not connected" });
     }
   }
+
   async updateTodoBelongList(todoId, listEndId, res) {
     try {
       const connection = await pool.getConnection(async conn => conn);
@@ -123,6 +123,31 @@ class Todo {
       );
       connection.release();
       if (rows.affectedRows) res.json({ message: "success" });
+      else res.json({ message: "error" });
+    } catch (err) {
+      res.json({ message: "db not connected" });
+    }
+  }
+
+  async addcolumn(boardId, res) {
+    try {
+      const connection = await pool.getConnection(async conn => conn);
+      const [rows] = await connection.query(
+        `insert into LIST(LIST_NAME, LIST_BELONG_BOARD) values("I don't have name", ?)`,
+        [boardId]
+      );
+      const [rows2] = await connection.query(
+        `select LIST_ID, LIST_NAME from LIST order by LIST_ID`
+      );
+      connection.release();
+      if (rows.affectedRows || rows2.length)
+        res.json({
+          message: "success",
+          data: {
+            id: rows2[rows2.length - 1].LIST_ID,
+            name: rows2[rows2.length - 1].LIST_NAME
+          }
+        });
       else res.json({ message: "error" });
     } catch (err) {
       res.json({ message: "db not connected" });
