@@ -77,10 +77,13 @@ const fetchDeleteTodo = todoId => {
     .catch(error => "error");
 };
 
-const fetchSortListOrder = (listStart, listEnd) => {
+const fetchSortListOrder = (listStartTodoIdArray, listEndTodoIdArray) => {
   return fetch(serverUrl + "todo/sort-list-order", {
     method: "POST",
-    body: JSON.stringify({ listStart, listEnd }),
+    body: JSON.stringify({
+      listStartTodoIdArray,
+      listEndTodoIdArray
+    }),
     headers: {
       "Content-Type": "application/json"
     }

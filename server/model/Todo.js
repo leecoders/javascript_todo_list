@@ -85,6 +85,36 @@ class Todo {
     }
   }
 
+  async sortListOrder(listStartTodoIdArray, listEndTodoIdArray, res) {
+    try {
+      const connection = await pool.getConnection(async conn => conn);
+      for (let i = 0; i < listStartTodoIdArray.length; ++i) {
+        const [rows] = await connection.query(
+          `update TODO set TODO_ORDER=? where TODO_ID=?`,
+          [i, listStartTodoIdArray[i]]
+        );
+        if (!rows.affectedRows) {
+          res.json({ message: "failure" });
+          return;
+        }
+      }
+      for (let i = 0; i < listEndTodoIdArray.length; ++i) {
+        const [rows] = await connection.query(
+          `update TODO set TODO_ORDER=? where TODO_ID=?`,
+          [i, listEndTodoIdArray[i]]
+        );
+        if (!rows.affectedRows) {
+          res.json({ message: "failure" });
+          return;
+        }
+      }
+      connection.release();
+      res.json({ message: "success" });
+    } catch (err) {
+      res.json({ message: "db not connected" });
+    }
+  }
+
   // async addDefaultList(userId, res) {
   //   try {
   //   const connection = await pool.getConnection(async conn => conn);

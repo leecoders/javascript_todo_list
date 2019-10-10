@@ -97,14 +97,23 @@ class Section {
   }
 
   async sortListTodos() {
-    const listArray = this.boardsData[0].lists; // 현재는 보드 1개 뿐!! 나중에 변경 대상
-    const listStartId = listArray[this.listStart].id;
-    const listEndId = listArray[this.listEnd].id;
-    const result = await fetchSortListOrder(listStartId, listEndId);
+    const listStartTodoIdArray = this.getTodoIdArray(this.listStart);
+    const listEndTodoIdArray = this.getTodoIdArray(this.listEnd);
+    const result = await fetchSortListOrder(
+      listStartTodoIdArray,
+      listEndTodoIdArray
+    );
     if (result.message !== "success") {
       console.log(result.message);
       return;
     }
+  }
+
+  getTodoIdArray(listNum) {
+    const todoContainer = $(`#todo-container-${listNum}`);
+    return Array.prototype.map.call(todoContainer.children, todo => {
+      return +todo.id.split("wrapper-")[1];
+    });
   }
 
   changeListCounterAfterMove() {

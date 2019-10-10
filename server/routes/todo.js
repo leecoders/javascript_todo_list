@@ -15,8 +15,8 @@ router.use("/delete-todo", async (req, res) => {
 });
 
 router.use("/sort-list-order", async (req, res) => {
-  const { listStart, listEnd } = req.body;
-  Todo.addTodo(listStart, listEnd, res);
+  const { listStartTodoIdArray, listEndTodoIdArray } = req.body;
+  Todo.sortListOrder(listStartTodoIdArray, listEndTodoIdArray, res);
 });
 
 router.use("/get-boards", async (req, res) => {
