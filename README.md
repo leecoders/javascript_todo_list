@@ -1,6 +1,6 @@
 # 멤버십 프로젝트 - 웹할일관리 저장소
 
-## 배포
+## 페이지
 
 ### [로그인 페이지](http://106.10.34.142:3000/signin)
 
@@ -8,7 +8,7 @@
   - ID : admin / PW : admin
   - ID : normal / PW : normal
 
-### [투두 페이지] : http://106.10.34.142:3000/todo/ + `유저 아이디`
+### 투두 페이지 : http://106.10.34.142:3000/todo/ + `유저 아이디`
 
 - 쿠키 권한 없으면 접근 불가
 - admin은 모든 사용자 페이지 접근 가능
@@ -17,11 +17,40 @@
 
 ### [관리자 페이지](http://106.10.34.142:3000/admin)
 
+## [디렉토리 구조](./docs/dir_tree.md)
+
+## 배포
+
+### 개발 환경 실행
+- nodemon
+```
+npm init
+npm i
+npm i nodemon
+npm run start:dev
+```
+- normal
+```
+npm init
+npm i
+npm run start
+```
+
+### 추가/수정 필요한 config 파일
+- `server/.env` : DB 접속 config (space 없이)
+  - HOST=?
+  - USER=?
+  - PASSWORD=?
+  - DATABASE=?
+  - SERVER_PORT=?
+- `server/public/src/serverConfig/index.js` : 클라이언트 -> 서버 요청 접근 config (문자열, 마지막에 `/` 까지)
+  - serverUrl = "http://106.10.34.142:3000/"
+
 ## DB
 
 ### DB EER
 
-![DB_EER]("https://user-images.githubusercontent.com/47619140/66574773-c0ebe500-ebaf-11e9-9652-01c3c748885e.png)
+![DB_EER](https://user-images.githubusercontent.com/47619140/66618549-66d13b00-ec14-11e9-9b25-bd4985c20037.png)
 
 ## 보드 ,리스트, 카드 데이터 객체화 시나리오
 
