@@ -16,6 +16,8 @@
   - board 없으면 기능 사용 불가
 
 ### [관리자 페이지](http://106.10.34.142:3000/admin)
+- 사용자 권한 변경 가능
+- 접근 권한 제한 없음
 
 ## 디렉토리 구조
 [디렉토리 구조](./docs/dir_tree.md)
@@ -63,31 +65,4 @@ npm run start
 4. 1, 2, 3번에서 가져온 데이터 BOARD 기준으로 객체로 묶기
 
 ### 보드 데이터 객체 구조
-
-```javascript
-const boards = [
-    board {
-        id : "board_id",
-        name : "board_name",
-        writable : "board_write_permission",
-        readable : "board_read_permission",
-        lists : [
-            list {
-                id : "list_id",
-                name : "list_name",
-                todos : [
-                    todo {
-                        id : "todo",
-                        order : "todo_order_in_list",
-                        content : "todo_content",
-                        addedBy : "user_id"
-                    },
-                    ...
-                ]
-            },
-            ...
-        ]
-    },
-    ...
-]
-```
+[객체 구조](./docs/board_data_obj.md)
